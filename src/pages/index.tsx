@@ -23,8 +23,6 @@ export default function Home() {
         queryFn: async () => await axios.get('/api/me'),
     })
 
-    me.refetch()
-
     const logoutMutation = useMutation({
         mutationFn: async () => await axios.post('/api/logout'),
     })
@@ -37,7 +35,10 @@ export default function Home() {
     })
     const signUpMutation = useMutation({
         mutationFn: async ({ name, password }: any) =>
-            await axios.post('/api/users', {}),
+            await axios.post('/api/users', {
+                name,
+                password,
+            }),
     })
 
     // console.log('🚀 ~ Home ~ me:', me)
