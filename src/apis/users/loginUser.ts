@@ -42,9 +42,7 @@ export const loginUser = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const payload = {
         name: user.name,
-        idx: user.idx,
-        createAt: user.createdAt,
-        updateAt: user.updatedAt,
+        password: user.password,
     }
     // JWT 생성
     const token = jwt.sign(payload, secretKey, {

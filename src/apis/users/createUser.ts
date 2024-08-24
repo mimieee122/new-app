@@ -39,11 +39,11 @@ const prisma = new PrismaClient()
 
 export const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        const { name, password, email, phone } = req.body
+        const { name, password } = req.body
 
-        if (!name || !password || !email) {
+        if (!name || !password) {
             return res.status(400).json({
-                message: '이름, 비밀번호, 이메일 모두 작성하세요.',
+                message: '이름, 비밀번호 모두 작성하세요.',
             })
         }
 
@@ -53,16 +53,14 @@ export const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
         // 사용자 생성
         const user = await prisma.user.create({
             data: {
-                password: hashedPassword,
-                email: email,
                 name: name,
-                phone: phone,
+                password: hashedPassword,
             },
         })
 
         // JWT 생성
         const token = sign(
-            { idx: user.idx, email: user.email },
+            { idx: user.idx },
             process.env.JWT_SECRET as string,
             {
                 expiresIn: '1h',
