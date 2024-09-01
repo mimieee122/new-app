@@ -1,19 +1,9 @@
-import { PrismaClient } from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { logoutUser } from '@/apis/users/logoutUser'
+import { destroyCookie } from 'nookies'
 
-const prisma = new PrismaClient()
-
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const logOut = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        if (req.method === 'POST') {
-            // 로그인
-            await logoutUser(req, res)
-        } else {
-            res.status(400).json({
-                message: '지원하지 않는 메서드입니다.',
-            })
-        }
+        destroyCookie({ res }, 'token', { path: '/' })
     } catch (error) {
         console.error('API 처리 중 오류 발생:', error)
         res.status(500).json({
@@ -22,4 +12,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 }
 
-export default handler
+export default logOut

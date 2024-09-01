@@ -1,20 +1,19 @@
-import { create } from 'domain'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { likeQuestion } from '@/apis/questions/likeQuestion'
-
 import { PrismaClient } from '@prisma/client'
+import { NextApiRequest, NextApiResponse } from 'next'
+import { createUser } from '../../apis/users/createUser'
 
 const prisma = new PrismaClient()
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { idx } = req.query
+// 완
 
-    const questionIdx = Number(idx)
-
+export default async function signup(
+    req: NextApiRequest,
+    res: NextApiResponse
+) {
     try {
         if (req.method === 'POST') {
-            // 답변 좋아요
-            await likeQuestion(questionIdx, req, res)
+            // 로그인
+            await createUser(req, res)
         } else {
             res.status(400).json({
                 message: '지원하지 않는 메서드입니다.',
@@ -27,5 +26,3 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         })
     }
 }
-
-export default handler
