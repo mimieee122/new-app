@@ -48,8 +48,13 @@ export default function Home() {
             })
         }
     }
-    const logout = () => {
-        logoutMutation.mutate()
+    const logout = (e: any) => {
+        e.preventDefault()
+        if (me.isSuccess) {
+            logoutMutation.mutate()
+            me.refetch()
+            window.location.href = '/'
+        }
     }
 
     return (
