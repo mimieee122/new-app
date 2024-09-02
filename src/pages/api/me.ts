@@ -1,6 +1,7 @@
 import { verify } from 'jsonwebtoken'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { parseCookies } from 'nookies'
+import { JwtPayload } from 'jsonwebtoken' // ?
 
 export default function me(req: NextApiRequest, res: NextApiResponse) {
     const cookies = parseCookies({ req })
@@ -14,13 +15,16 @@ export default function me(req: NextApiRequest, res: NextApiResponse) {
     let payload
     try {
         payload = verify(token, process.env.JWT_SECRET as any)
-        return res
-            .status(200)
-            .json({ status: 'success', message: '올바르게 토큰 제공 완료' })
+
+        const { nickname } = payload as JwtPayload
+        return res.status(200).json({
+            status: 'success',
+            message: '올바르게 토큰 제공 완료',
+            nickname,
+        })
     } catch {
         return res
             .status(401)
             .json({ status: 'fail', message: '토큰이 올바르지 않습니다.' })
     }
-    res.status(200).json({ status: 'success' })
 }

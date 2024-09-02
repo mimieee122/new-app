@@ -8,6 +8,10 @@ export default function Home() {
     })
     const logoutMutation = useMutation({
         mutationFn: async () => await axios.post('/api/logout'),
+        onSuccess: async () => {
+            await me.refetch()
+            window.location.reload()
+        },
     })
     const loginMutation = useMutation({
         mutationFn: async ({ nickname, password }: any) =>
@@ -15,6 +19,10 @@ export default function Home() {
                 nickname,
                 password,
             }),
+        onSuccess: async () => {
+            await me.refetch()
+            window.location.reload()
+        },
     })
     const signUpMutation = useMutation({
         mutationFn: async ({ nickname, password }: any) =>
@@ -22,6 +30,9 @@ export default function Home() {
                 nickname,
                 password,
             }),
+        onSuccess: () => {
+            window.location.reload()
+        },
     })
 
     const login = (e: any) => {
@@ -34,12 +45,11 @@ export default function Home() {
                 nickname: e.currentTarget.nickname.value,
                 password: e.currentTarget.password.value,
             })
-            me.refetch()
         }
     }
     const signUp = (e: any) => {
         e.preventDefault()
-        if (e.currentTarget.nickname.value !== null) {
+        if (e.currentTarget.nickname.value) {
             alert('이미 존재하는 아이디 입니다.')
         } else {
             signUpMutation.mutate({
@@ -52,16 +62,16 @@ export default function Home() {
         e.preventDefault()
         if (me.isSuccess) {
             logoutMutation.mutate()
-            me.refetch()
-            window.location.href = '/'
+        } else {
+            alert('로그인 상태가 아닙니다.')
         }
     }
 
     return (
         <div className="text-white">
-            <p>
+            <p className="text-white">
                 <span>현재 로그인된 유저의 닉네임: </span>
-                <span>{me.data?.data.nickname}</span>
+                <span>{me.data?.data.nickname || '없음'}</span>
             </p>
             <form
                 onSubmit={login}
@@ -108,7 +118,6 @@ export default function Home() {
                 />
                 <button type="submit">회원가입</button>
             </form>
-            <p>abc</p>
         </div>
     )
 }

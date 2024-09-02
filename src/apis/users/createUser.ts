@@ -35,12 +35,12 @@ export const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
             { idx: user.idx },
             process.env.JWT_SECRET as string,
             {
-                expiresIn: '1h',
+                expiresIn: '10h',
             }
         )
         //console.log('🚀 ~ createUser ~ token:', token)
 
-        res.status(200).json({ message: 'success' })
+        res.status(200).json({ message: 'success', user, token })
     } catch (error) {
         console.error('회원가입 중 오류 발생:', error)
         res.status(500).json({
