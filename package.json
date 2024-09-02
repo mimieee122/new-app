@@ -18,7 +18,8 @@
     "nookies": "^2.5.2",
     "prisma": "^5.18.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-router-dom": "^6.26.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

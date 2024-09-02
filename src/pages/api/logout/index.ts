@@ -4,6 +4,7 @@ import { destroyCookie } from 'nookies'
 const logOut = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         destroyCookie({ res }, 'token', { path: '/' })
+        res.status(200).json({ message: 'success' })
     } catch (error) {
         console.error('API 처리 중 오류 발생:', error)
         res.status(500).json({

@@ -12,8 +12,8 @@ export default async function signup(
 ) {
     try {
         if (req.method === 'POST') {
-            // 로그인
-            await createUser(req, res)
+            // 회원가입
+            createUser(req, res)
         } else {
             res.status(400).json({
                 message: '지원하지 않는 메서드입니다.',

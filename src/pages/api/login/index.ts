@@ -57,7 +57,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             secure: false, // Only sent over HTTP
         })
 
-        res.status(200).json({ message: '로그인 성공!' })
+        res.status(200).json({ message: 'success' })
     } catch (error) {
         console.error('API 처리 중 오류 발생:', error)
         res.status(500).json({
