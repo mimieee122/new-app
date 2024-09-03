@@ -17,20 +17,17 @@ const PostComponent = () => {
             data,
         }: {
             method: string
-
             data?: any
         }) => {
-            let response
-            if (method === 'POST') {
-                response = await axios.post('/api/posts/index', data)
-            } else if (method === 'PUT') {
-                response = await axios.put(`/api/posts/${data.idx}`, data)
+            if (method === 'PUT') {
+                await axios.put(`/api/posts/${data.idx}`, data)
+            } else if (method === 'POST') {
+                await axios.post('/api/posts', data)
             } else if (method === 'DELETE') {
-                response = await axios.delete(`/api/posts/${data.idx}`)
+                await axios.delete(`/api/posts/${data.idx}`)
             } else {
                 throw new Error('지원하지 않는 메서드입니다.')
             }
-            return response.data
         },
         onSuccess: () => {
             // queryClient.invalidateQueries(['posts'])
@@ -116,15 +113,26 @@ const PostComponent = () => {
 
         const title = e.target.title.value
         const content = e.target.content.value
+        const authorIdx = localStorage.getItem('authorIdx')
+        const idx = Number(authorIdx)
 
         if (!title || !content) {
             alert('제목과 내용을 입력해주세요.')
             return
         }
 
+        // if (!authorIdx || authorIdx === 'undefined') {
+        //     alert('Author ID is missing or invalid. Please log in again.')
+        //     return
+        // }
+
         postMutation.mutate({
             method: 'POST',
-            data: { title, content },
+            data: {
+                title,
+                content,
+                authorIdx: idx,
+            },
         })
     }
 

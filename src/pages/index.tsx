@@ -8,11 +8,24 @@ export default function Home() {
     })
 
     const loginMutation = useMutation({
-        mutationFn: async ({ nickname, password }: any) =>
-            await axios.post('/api/login', {
+        mutationFn: async ({ nickname, password }: any) => {
+            const response = await axios.post('/api/login', {
                 nickname,
                 password,
-            }),
+            })
+
+            //console.log('Full Response:', response) // Log the full response object
+            //console.log('Response Data:', response.data) // Log the data part of the response
+
+            const { payload } = response.data
+            const authorIdx = payload.idx // 서버에서 받은 authorIdx
+            if (!authorIdx || authorIdx === undefined) {
+                console.error(
+                    'Failed to set authorIdx: value is undefined or null'
+                )
+            }
+            localStorage.setItem('authorIdx', authorIdx)
+        },
         onSuccess: async () => {
             await me.refetch()
             window.location.reload()

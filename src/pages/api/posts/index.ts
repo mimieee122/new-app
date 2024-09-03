@@ -38,8 +38,8 @@ export default async function handler(
         }
 
         // POST 요청: 게시글 생성
-        if (req.method === 'POST') {
-            const post = await createPost(req, res, authorIdx)
+        else if (req.method === 'POST') {
+            await createPost(req, res)
             return // POST 요청에 대해 더 이상의 처리가 필요 없으므로 반환
         }
 

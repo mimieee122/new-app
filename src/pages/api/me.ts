@@ -24,7 +24,7 @@ export default function me(req: NextApiRequest, res: NextApiResponse) {
         })
     } catch {
         return res
-            .status(401)
+            .status(402)
             .json({ status: 'fail', message: '토큰이 올바르지 않습니다.' })
     }
 }
