@@ -14,7 +14,7 @@ export default function me(req: NextApiRequest, res: NextApiResponse) {
     }
     let payload
     try {
-        payload = verify(token, process.env.JWT_SECRET as any)
+        payload = verify(token, process.env.SECRET_JWT as any)
 
         const { nickname } = payload as JwtPayload
         return res.status(200).json({

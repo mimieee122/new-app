@@ -17,5 +17,9 @@ export const createPost = async (
             authorIdx,
         },
     })
-    res.status(201).json(post)
+    try {
+        return res.status(201).json(post)
+    } catch (error) {
+        return res.status(500).json({ message: '게시물 생성 중 오류 발생' })
+    }
 }

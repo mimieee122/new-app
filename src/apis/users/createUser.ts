@@ -33,7 +33,7 @@ export const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
         // JWT 생성
         const token = sign(
             { idx: user.idx },
-            process.env.JWT_SECRET as string,
+            process.env.SECRET_JWT as string,
             {
                 expiresIn: '10h',
             }

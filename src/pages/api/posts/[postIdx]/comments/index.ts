@@ -20,10 +20,10 @@ export default async function handler(
         // 서버에 전달된 쿠키 문자열을 js 객체로 변환해주는 함수
 
         const token = cookies['token']
-        const secret = process.env.JWT_SECRET
+        const secret = process.env.SECRET_JWT
 
         if (!secret) {
-            throw new Error('JWT_SECRET 환경 변수가 설정되지 않았습니다.')
+            throw new Error('SECRET_JWT 환경 변수가 설정되지 않았습니다.')
         }
 
         if (!token) {
