@@ -43,6 +43,9 @@ export default async function handler(
         } else if (req.method === 'PUT') {
             const post = await updatePost(req, res)
             return res.status(200).json(post)
+        } else if (req.method === 'DELETE') {
+            const post = await deletePost(req, res)
+            return res.status(200).json(post)
         }
 
         // 게시글 삭제 (DELETE)

@@ -66,7 +66,6 @@ const PostComponent = () => {
             content: string
         }) => {
             const { postIdx } = data
-            console.log('postIdx:', postIdx) // postIdx 확인
 
             const idx = Number(postIdx)
             await axios.put(`/api/posts/${idx}`, data)
@@ -94,6 +93,20 @@ const PostComponent = () => {
 
         updatePostMutation.mutate({ postIdx: idx, title, content })
     }
+
+    // Mutation for deleting a post
+    const deletePostMutation = useMutation({
+        mutationFn: async (postIdx: number) => {
+            const idx = Number(postIdx)
+            await axios.delete(`/api/posts/${idx}`, { data: { postIdx: idx } })
+        },
+        onSuccess: () => {
+            refetch() // Refetch posts after successful deletion
+        },
+        onError: (error) => {
+            alert('게시물 삭제에 실패했습니다. 다시 시도해 주세요.')
+        },
+    })
 
     // const deletePostMutation = useMutation({
     //     mutationFn: async (data: { idx: number }) => {
@@ -185,6 +198,19 @@ const PostComponent = () => {
                                     }}
                                 >
                                     수정
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        if (
+                                            window.confirm(
+                                                '정말로 이 게시물을 삭제하시겠습니까?'
+                                            )
+                                        ) {
+                                            deletePostMutation.mutate(post.idx)
+                                        }
+                                    }}
+                                >
+                                    삭제
                                 </button>
                             </div>
                         )}
