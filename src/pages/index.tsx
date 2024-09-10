@@ -1,7 +1,10 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 import axios from 'axios'
 
 export default function Home() {
+    const [nickname, setNickname] = useState('')
+    const [password, setPassword] = useState('') // 내용 상태
     const me = useQuery({
         queryKey: ['me'],
         queryFn: async () => await axios.get('/api/me'),
@@ -34,6 +37,7 @@ export default function Home() {
         },
         onSuccess: async () => {
             await me.refetch()
+            alert('로그인이 완료되었습니다.')
             window.location.reload()
         },
     })
@@ -42,7 +46,11 @@ export default function Home() {
         mutationFn: async () => await axios.post('/api/logout'),
         onSuccess: async () => {
             await me.refetch()
-            window.location.reload()
+            setNickname('') // ID 초기화
+            setPassword('') // 비밀번호 초기화
+
+            alert('로그아웃이 완료되었습니다.')
+            //window.location.reload()
         },
     })
 
@@ -73,17 +81,18 @@ export default function Home() {
     }
 
     const goPostPage = () => {
-        window.location.href = '/post'
+        window.location.href = `/post`
     }
 
     return (
         <div className="flex flex-row justify-end gap-[100px] h-screen bg-blue-800 ">
             <div className="w-[750px] ml-[0px]"></div>
             <div className="blue text-black w-[550px] bg-black flex flex-col gap-[30px] justify-center items-center ">
-                <p className="text-white underline">
+                {/* <p className="text-white underline">
                     <span>현재 로그인된 유저의 아이디: </span>
-                    <span>{me.data?.data.nickname || '없음'}</span>
-                </p>
+                    <span>{nickname || '없음'}</span>
+                </p> */}
+
                 <div className="text-black login ">
                     <form
                         onSubmit={login}
@@ -95,15 +104,17 @@ export default function Home() {
                         <label htmlFor="nickname">ID</label>
                         <input
                             type="text"
-                            placeholder="nickname"
+                            onChange={(e) => setNickname(e.target.value)}
                             id="name"
                             name="nickname"
+                            value={nickname}
                             className=" text-center border-black border-[1px]"
                         />
                         <label htmlFor="password">password</label>
                         <input
                             type="password"
-                            placeholder="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
                             id="password"
                             name="password"
                             className=" text-center border-black border-[1px]"

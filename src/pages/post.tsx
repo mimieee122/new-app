@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useState } from 'react'
+import Home from '.'
 
 const PostComponent = () => {
     const [isCreating, setIsCreating] = useState(false)
@@ -47,8 +48,8 @@ const PostComponent = () => {
         e.preventDefault()
 
         const title = e.target.title.value
-        const nickname = e.target.nickname.value
         const content = e.target.content.value
+        const nickname = e.target.nickname.value
 
         if (!title || !content || !nickname) {
             alert('제목과 내용, 닉네임을 입력해주세요.')
