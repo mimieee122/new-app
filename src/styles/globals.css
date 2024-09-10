@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'SF_HambakSnow';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff')
+        format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff')
+        format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html {
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,4 +28,41 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.blue {
+    font-family: 'PFStardust';
+
+    font-size: 20px;
+
+    -webkit-text-stroke: 1px white;
+    letter-spacing: 1px;
+}
+
+.login {
+    font-family: 'PFStardust';
+    font-size: 20px;
+    -webkit-text-stroke: 1.5px black;
+    letter-spacing: 1px;
+    /* box-shadow: 0 0 20px white; */
+}
+
+.button {
+    width: 350px;
+    height: 50px;
+    background-color: blue;
+    border: white 4px solid;
+    border-radius: 10px;
+}
+
+.signIn {
+    -webkit-text-stroke: 4px blue;
+}
+
+.logIn {
+    width: 300px;
+    height: 50px;
+    background-color: white;
+    border: blue 6px solid;
+    border-radius: 10px;
 }

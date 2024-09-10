@@ -77,26 +77,28 @@ export default function Home() {
     }
 
     return (
-        <div className="flex flex-row justify-end gap-[100px] h-screen bg-white ">
-            <div className="w-[550px] ml-[0px]"></div>
-            <div className="w-[750px] bg-blue-700 flex flex-col gap-[50px] justify-center items-center ">
-                <p className="text-white">
+        <div className="flex flex-row justify-end gap-[100px] h-screen bg-blue-800 ">
+            <div className="w-[750px] ml-[0px]"></div>
+            <div className="blue text-black w-[550px] bg-black flex flex-col gap-[30px] justify-center items-center ">
+                <p className="text-white underline">
                     <span>현재 로그인된 유저의 아이디: </span>
                     <span>{me.data?.data.nickname || '없음'}</span>
                 </p>
-                <div className="text-white ">
+                <div className="text-black login ">
                     <form
                         onSubmit={login}
-                        className="flex flex-col text-center gap-[30px] w-96 text-black p-4 bg-gray-100 rounded-xl"
+                        className="flex flex-col justify-center items-center border-blue-700 border-[8px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 rounded-xl"
                     >
-                        <p>로그인</p>
+                        <p className="text-[40px] signIn text-blue-700">
+                            SIGN IN
+                        </p>
                         <label htmlFor="nickname">ID</label>
                         <input
                             type="text"
                             placeholder="nickname"
                             id="name"
                             name="nickname"
-                            className=" text-center"
+                            className=" text-center border-black border-[1px]"
                         />
                         <label htmlFor="password">password</label>
                         <input
@@ -104,20 +106,28 @@ export default function Home() {
                             placeholder="password"
                             id="password"
                             name="password"
-                            className=" text-center"
+                            className=" text-center border-black border-[1px]"
                         />
-                        <button type="submit">로그인</button>
+                        <button className="button logIn" type="submit">
+                            로그인
+                        </button>
                     </form>
                 </div>
-                <button type="button" onClick={logout}>
-                    로그아웃
-                </button>
-                <button type="button" onClick={goSignupPage}>
+                <button className="button" type="button" onClick={goSignupPage}>
                     회원가입
                 </button>
-                <button type="button" onClick={goPostPage}>
-                    게시판
-                </button>
+                <div className="flex flex-row w-[350px] gap-[5px] justify-center">
+                    <button className="button" type="button" onClick={logout}>
+                        로그아웃
+                    </button>
+                    <button
+                        className="button"
+                        type="button"
+                        onClick={goPostPage}
+                    >
+                        게시판
+                    </button>
+                </div>
             </div>
         </div>
     )
