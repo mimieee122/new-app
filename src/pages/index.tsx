@@ -77,33 +77,38 @@ export default function Home() {
     }
 
     return (
-        <div className="flex flex-col gap-[50px] justify-center mt-[40px]">
-            <p className="text-white">
-                <span>현재 로그인된 유저의 닉네임: </span>
-                <span>{me.data?.data.nickname || '없음'}</span>
-            </p>
-            <div className="text-white flex flex-row gap-[30px]">
-                <form
-                    onSubmit={login}
-                    className="flex flex-col gap-2 w-96 text-black p-4 bg-gray-100 rounded-xl"
-                >
-                    <p>로그인</p>
-                    <label htmlFor="nickname">nickname</label>
-                    <input
-                        type="text"
-                        placeholder="nickname"
-                        id="name"
-                        name="nickname"
-                    />
-                    <label htmlFor="password">password</label>
-                    <input
-                        type="password"
-                        placeholder="password"
-                        id="password"
-                        name="password"
-                    />
-                    <button type="submit">로그인</button>
-                </form>
+        <div className="flex flex-row justify-end gap-[100px] h-screen bg-white ">
+            <div className="w-[550px] ml-[0px]"></div>
+            <div className="w-[750px] bg-blue-700 flex flex-col gap-[50px] justify-center items-center ">
+                <p className="text-white">
+                    <span>현재 로그인된 유저의 아이디: </span>
+                    <span>{me.data?.data.nickname || '없음'}</span>
+                </p>
+                <div className="text-white ">
+                    <form
+                        onSubmit={login}
+                        className="flex flex-col text-center gap-[30px] w-96 text-black p-4 bg-gray-100 rounded-xl"
+                    >
+                        <p>로그인</p>
+                        <label htmlFor="nickname">ID</label>
+                        <input
+                            type="text"
+                            placeholder="nickname"
+                            id="name"
+                            name="nickname"
+                            className=" text-center"
+                        />
+                        <label htmlFor="password">password</label>
+                        <input
+                            type="password"
+                            placeholder="password"
+                            id="password"
+                            name="password"
+                            className=" text-center"
+                        />
+                        <button type="submit">로그인</button>
+                    </form>
+                </div>
                 <button type="button" onClick={logout}>
                     로그아웃
                 </button>

@@ -51,7 +51,7 @@ export default function Signup() {
                 className="flex flex-col gap-2 mt-[50px] w-96 text-black p-4 bg-gray-100 rounded-xl"
             >
                 <p>회원가입</p>
-                <label htmlFor="nickname">nickname</label>
+                <label htmlFor="nickname">ID</label>
                 <input
                     type="text"
                     placeholder="nickname"

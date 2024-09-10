@@ -127,7 +127,7 @@ const PostComponent = () => {
 
             {/* Post creation form */}
             <form onSubmit={handleCreatePost}>
-                <label htmlFor="nickname">닉네임</label>
+                <label htmlFor="nickname">ID</label>
                 <input
                     className="text-black"
                     type="text"
@@ -188,7 +188,7 @@ const PostComponent = () => {
                             </form>
                         ) : (
                             <div className="flex flex-row gap-[10px]">
-                                <h2>닉네임 : {post.nickname}</h2>
+                                <h2>ID : {post.nickname}</h2>
                                 <h2>제목 : {post.title}</h2>
                                 <p>내용 : {post.content}</p>
                                 <button
