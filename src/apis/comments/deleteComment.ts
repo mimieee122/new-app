@@ -7,10 +7,15 @@ const prisma = new PrismaClient()
 export const deleteComment = async (
     req: NextApiRequest,
     res: NextApiResponse,
-    commentIdx: number
+    commentIdx?: number
 ) => {
-    const comment = await prisma.comment.delete({
-        where: { commentIdx },
-    })
-    res.status(200).json(comment)
+    if (commentIdx) {
+        const comment = await prisma.comment.delete({
+            where: { commentIdx: commentIdx },
+        })
+        res.status(200).json(comment)
+    } else {
+        await prisma.comment.findMany({})
+        res.status(201).json({ message: '전부 삭제 완료' })
+    }
 }

@@ -8,23 +8,29 @@ export default function Home() {
     })
 
     const loginMutation = useMutation({
-        mutationFn: async ({ nickname, password }: any) => {
+        mutationFn: async ({
+            nickname,
+            password,
+        }: {
+            nickname: string
+            password: string
+        }) => {
             const response = await axios.post('/api/login', {
                 nickname,
                 password,
             })
 
-            //console.log('Full Response:', response) // Log the full response object
-            //console.log('Response Data:', response.data) // Log the data part of the response
-
             const { payload } = response.data
-            const authorIdx = payload.idx // 서버에서 받은 authorIdx
+            const authorIdx = payload.idx
+
             if (!authorIdx || authorIdx === undefined) {
                 console.error(
                     'Failed to set authorIdx: value is undefined or null'
                 )
+                throw new Error('로그인 실패: 유효하지 않은 데이터입니다.')
             }
             localStorage.setItem('authorIdx', authorIdx)
+            return response.data
         },
         onSuccess: async () => {
             await me.refetch()
@@ -86,7 +92,7 @@ export default function Home() {
                     <input
                         type="text"
                         placeholder="nickname"
-                        id="nickname"
+                        id="name"
                         name="nickname"
                     />
                     <label htmlFor="password">password</label>
