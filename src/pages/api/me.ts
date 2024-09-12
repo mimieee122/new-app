@@ -3,6 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { parseCookies } from 'nookies'
 import { JwtPayload } from 'jsonwebtoken' // ?
 
+// 토큰이 올바르게 제공되었는지 check / GET 메소드 일 수행
+
 export default function me(req: NextApiRequest, res: NextApiResponse) {
     const cookies = parseCookies({ req })
     const token = cookies['token']

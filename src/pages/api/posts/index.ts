@@ -5,8 +5,6 @@ import { parseCookies } from 'nookies'
 import { verify, JwtPayload } from 'jsonwebtoken'
 import { geteveryPost } from '@/apis/posts/getPost'
 
-const prisma = new PrismaClient()
-
 interface DecodedToken extends JwtPayload {
     authorIdx: number
 }
@@ -23,19 +21,7 @@ export default async function handler(
             .json({ message: 'JWT_SECRET 환경 변수가 설정되지 않았습니다.' })
     }
 
-    // 쿠키에서 토큰 가져오기
-    // const cookies = parseCookies({ req })
-    // const token = cookies['token']
-
-    // if (!token) {
-    //     return res.status(401).json({ message: '토큰이 제공되지 않았습니다.' })
-    // }
-
     try {
-        // 토큰 검증
-        // const decoded = verify(token, secret) as DecodedToken
-        // const authorIdx = decoded.authorIdx
-
         // POST 요청 처리
         if (req.method === 'POST') {
             const { title, content, nickname } = req.body

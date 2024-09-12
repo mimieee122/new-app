@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useState } from 'react'
-import Home from '.'
+import Link from 'next/link'
+import Button from '@/components/button'
 
 const PostComponent = () => {
     const [isCreating, setIsCreating] = useState(false)
@@ -20,14 +21,14 @@ const PostComponent = () => {
     })
 
     // Fetching comments (only when a post is selected)
-    const { data: comments } = useQuery({
-        queryKey: ['comments', currentPostIdx],
-        enabled: !!currentPostIdx,
-        queryFn: async () => {
-            const response = await axios.get(`/api/${currentPostIdx}/comments`)
-            return response.data
-        },
-    })
+    // const { data: comments } = useQuery({
+    //     queryKey: ['comments', currentPostIdx],
+    //     enabled: !!currentPostIdx,
+    //     queryFn: async () => {
+    //         const response = await axios.get(`/api/${currentPostIdx}/comments`)
+    //         return response.data
+    //     },
+    // })
 
     // Mutation for creating a post
     const createPostMutation = useMutation({
@@ -116,16 +117,15 @@ const PostComponent = () => {
     // })
 
     // Navigating to the home page
-    const homePage = () => {
-        window.location.href = '/'
-    }
+    // const homePage = () => {
+    //     window.location.href = '/'
+    // }
 
     return (
         <div className="text-white flex flex-col gap-[10px]">
-            <button type="button" onClick={homePage}>
-                HOME
-            </button>
-
+            <Link href={'/'}>
+                <button type="button">HOME</button>
+            </Link>
             {/* Post creation form */}
             <form onSubmit={handleCreatePost}>
                 <label htmlFor="nickname">ID</label>
@@ -155,6 +155,8 @@ const PostComponent = () => {
 
                 <button type="submit">게시글 작성</button>
             </form>
+
+            {/* editingPost는 게시글의 ID(number)를 저장하거나, 현재 편집 중인 게시글이 없을 때는 null을 저장*/}
 
             {/* Display posts */}
             <div>
