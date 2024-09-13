@@ -90,9 +90,8 @@ export default function Home() {
     // }
 
     return (
-        <div className="flex flex-row justify-end gap-[100px] h-screen bg-blue-800 ">
-            <div className="w-[750px] ml-[0px]"></div>
-            <div className="blue text-black w-[800px] bg-black flex flex-col gap-[30px] justify-center items-center ">
+        <div className="flex flex-row justify-center  h-screen  ">
+            <div className="blue text-black w-[1000px]  flex flex-col gap-[30px] justify-center items-center ">
                 {/* <p className="text-white underline">
                     <span>현재 로그인된 유저의 아이디: </span>
                     <span>{nickname || '없음'}</span>
@@ -100,7 +99,7 @@ export default function Home() {
 
                 <div className="text-black login ">
                     {me.isSuccess ? (
-                        <div className="flex flex-col justify-center items-center border-blue-700 border-[8px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 rounded-xl">
+                        <div className="flex flex-col justify-center items-center  border-blue-700 border-[8px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 bg-opacity-40 rounded-xl">
                             <p className="text-[40px] signIn text-blue-700">
                                 로그인 성공!
                             </p>
@@ -108,9 +107,9 @@ export default function Home() {
                     ) : (
                         <form
                             onSubmit={login}
-                            className="flex flex-col justify-center items-center border-blue-700 border-[8px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 rounded-xl"
+                            className="flex flex-col border-black border-[2px] border-solid  justify-center items-center text-center gap-[30px] w-[600px] text-black p-4 bg-white bg-opacity-35 rounded-xl"
                         >
-                            <p className="text-[40px] signIn text-blue-700">
+                            <p className="text-[40px] signIn text-[#5fbfe9]">
                                 SIGN IN
                             </p>
                             <label htmlFor="nickname">ID</label>
@@ -132,24 +131,18 @@ export default function Home() {
                                 className=" text-center border-black border-[1px]"
                             />
 
-                            {/* <Button type="submit">로그인</Button> */}
+                            <Button>로그인</Button>
                         </form>
                     )}
                 </div>
                 <Link href="/signup">
-                    <button className="button" type="button">
-                        회원가입
-                    </button>
+                    <Button>회원가입</Button>
                 </Link>
 
-                <div className="flex flex-row w-[350px] gap-[5px] justify-center">
-                    <button className="button" type="button" onClick={logout}>
-                        로그아웃
-                    </button>
+                <div className="flex flex-row w-[600px] gap-[5px] justify-center">
+                    <Button onClick={logout}>로그아웃</Button>
                     <Link href="/post">
-                        <button className="button" type="button">
-                            게시판
-                        </button>
+                        <Button>게시판</Button>
                     </Link>
                 </div>
             </div>

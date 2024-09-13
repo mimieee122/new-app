@@ -21,7 +21,11 @@
 html {
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: black;
+    /* background-color: black; */
+    /* background-image: url('https://i.pinimg.com/736x/11/0f/de/110fde22ab1c775994acf0be0d514813.jpg'); */
+    background-image: url('https://github.com/mimieee122/mslogo/blob/main/%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EB%B0%94%ED%83%95%ED%99%94%EB%A9%B4.jpg?raw=true');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 body {
@@ -35,7 +39,7 @@ body {
 
     font-size: 20px;
 
-    -webkit-text-stroke: 1px white;
+    -webkit-text-stroke: 1px black;
     letter-spacing: 1px;
 }
 
@@ -55,7 +59,7 @@ body {
 }
 
 .signIn {
-    -webkit-text-stroke: 4px blue;
+    -webkit-text-stroke: 4px black;
 }
 
 /* .logIn {

@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         const user = await prisma.user.findUnique({
             where: {
-                idx: Number(req.query.idx),
+                nickname: nickname,
             },
         })
 
@@ -47,7 +47,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
 
         const token = await sign(payload, process.env.SECRET_JWT as any, {
-            expiresIn: '24h',
+            expiresIn: '10h',
         })
 
         setCookie({ res }, 'token', token, {
