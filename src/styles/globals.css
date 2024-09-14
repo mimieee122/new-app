@@ -18,14 +18,24 @@
     font-style: normal;
 }
 
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
 html {
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* background-color: black; */
-    /* background-image: url('https://i.pinimg.com/736x/11/0f/de/110fde22ab1c775994acf0be0d514813.jpg'); */
-    background-image: url('https://github.com/mimieee122/mslogo/blob/main/%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EB%B0%94%ED%83%95%ED%99%94%EB%A9%B4.jpg?raw=true');
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: black;
+}
+
+.default-bg {
+    @apply bg-[url('https://github.com/mimieee122/mslogo/blob/main/%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EB%B0%94%ED%83%95%ED%99%94%EB%A9%B4.jpg?raw=true')] bg-cover bg-no-repeat;
+}
+
+.logged-in-bg {
+    @apply bg-[url('https://github.com/mimieee122/mslogo/blob/main/%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EC%84%B1%EA%B3%B5.jpg?raw=true')] bg-cover bg-no-repeat;
 }
 
 body {
@@ -62,10 +72,10 @@ body {
     -webkit-text-stroke: 4px black;
 }
 
-/* .logIn {
+.logIn {
     width: 300px;
     height: 50px;
     background-color: white;
     border: blue 6px solid;
     border-radius: 10px;
-} */
+}

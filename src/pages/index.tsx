@@ -8,6 +8,7 @@ import Button from '@/components/button'
 export default function Home() {
     const [nickname, setNickname] = useState('')
     const [password, setPassword] = useState('') // 내용 상태
+
     const me = useQuery({
         queryKey: ['me'],
         queryFn: async () => await axios.get('/api/me'),
@@ -40,8 +41,8 @@ export default function Home() {
             return response.data
         },
         onSuccess: async () => {
-            alert('로그인이 완료되었습니다.')
             window.location.reload()
+            alert('로그인이 완료되었습니다.')
             await me.refetch()
         },
     })
@@ -52,8 +53,8 @@ export default function Home() {
             setNickname('') // ID 초기화
             setPassword('') // 비밀번호 초기화
 
-            alert('로그아웃이 완료되었습니다.')
             window.location.reload()
+            alert('로그아웃이 완료되었습니다.')
             await me.refetch()
         },
     })
@@ -90,7 +91,11 @@ export default function Home() {
     // }
 
     return (
-        <div className="flex flex-row justify-center  h-screen  ">
+        <div
+            className={`${
+                me.isSuccess ? 'logged-in-bg' : 'default-bg'
+            } flex flex-row justify-center w-screen h-screen`}
+        >
             <div className="blue text-black w-[1000px]  flex flex-col gap-[30px] justify-center items-center ">
                 {/* <p className="text-white underline">
                     <span>현재 로그인된 유저의 아이디: </span>
@@ -99,15 +104,15 @@ export default function Home() {
 
                 <div className="text-black login ">
                     {me.isSuccess ? (
-                        <div className="flex flex-col justify-center items-center  border-blue-700 border-[8px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 bg-opacity-40 rounded-xl">
-                            <p className="text-[40px] signIn text-blue-700">
+                        <div className=" flex flex-col justify-center items-center  border-[#5fbfe9] border-[8px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 bg-opacity-40 rounded-xl">
+                            <p className="text-[40px] signIn text-black">
                                 로그인 성공!
                             </p>
                         </div>
                     ) : (
                         <form
                             onSubmit={login}
-                            className="flex flex-col border-black border-[2px] border-solid  justify-center items-center text-center gap-[30px] w-[600px] text-black p-4 bg-white bg-opacity-35 rounded-xl"
+                            className=" flex flex-col border-black border-[2px] border-solid  justify-center items-center text-center gap-[30px] w-[600px] text-black p-4 bg-white bg-opacity-35 rounded-xl"
                         >
                             <p className="text-[40px] signIn text-[#5fbfe9]">
                                 SIGN IN
@@ -141,7 +146,7 @@ export default function Home() {
 
                 <div className="flex flex-row w-[600px] gap-[5px] justify-center">
                     <Button onClick={logout}>로그아웃</Button>
-                    <Link href="/post">
+                    <Link href="/post" className="post-bg">
                         <Button>게시판</Button>
                     </Link>
                 </div>
