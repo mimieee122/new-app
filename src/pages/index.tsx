@@ -98,13 +98,14 @@ export default function Home() {
         >
             <div className="blue text-black w-[1000px]  flex flex-col gap-[30px] justify-center items-center ">
                 {/* <p className="text-white underline">
-                    <span>현재 로그인된 유저의 아이디: </span>
+                    <span>우리의 유저 </span>
                     <span>{nickname || '없음'}</span>
+                    <span>님 어서오세용</span>
                 </p> */}
 
                 <div className="text-black login ">
                     {me.isSuccess ? (
-                        <div className=" flex flex-col justify-center items-center  border-[#5fbfe9] border-[8px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 bg-opacity-40 rounded-xl">
+                        <div className=" flex flex-col justify-center items-center  border-[#5fbfe9] border-[1px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 bg-opacity-40 rounded-xl">
                             <p className="text-[40px] signIn text-black">
                                 로그인 성공!
                             </p>
