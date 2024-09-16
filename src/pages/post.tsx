@@ -1,8 +1,10 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import React from 'react'
 import { useState } from 'react'
 import Link from 'next/link'
 import Button from '@/components/button'
+import { parseCookies } from 'nookies'
 
 const PostComponent = () => {
     const [isCreating, setIsCreating] = useState(false)
@@ -37,7 +39,16 @@ const PostComponent = () => {
             title: string
             content: string
         }) => {
-            await axios.post('/api/posts', data)
+            try {
+                await axios.post('/api/posts', data)
+            } catch (error: any) {
+                if (error.response && error.response.data) {
+                    alert(error.response.data.message)
+                } else {
+                    alert('게시물 생성 중 오류가 발생했습니다.')
+                }
+                console.error('An error occurred:', error)
+            }
         },
         onSuccess: () => {
             setIsCreating(false)
@@ -48,10 +59,17 @@ const PostComponent = () => {
     const handleCreatePost = (e: any) => {
         e.preventDefault()
 
+        const nickname = e.target.nickname.value
         const title = e.target.title.value
         const content = e.target.content.value
-        const nickname = e.target.nickname.value
 
+        // const authorIdx = localStorage.getItem('authorIdx')
+        // const idx = authorIdx ? Number(authorIdx) : null
+
+        // if (idx === null) {
+        //     alert('로그인 후 글을 작성할 수 있습니다.')
+        //     return
+        // }
         if (!title || !content || !nickname) {
             alert('제목과 내용, 닉네임을 입력해주세요.')
             return
@@ -76,8 +94,12 @@ const PostComponent = () => {
             setEditingPost(null)
             refetch() // Refetch posts after successful update
         },
-        onError: (error) => {
-            alert('게시물 업데이트에 실패했습니다. 다시 시도해 주세요.')
+        onError: (error: any) => {
+            if (error.response && error.response.data) {
+                alert(error.response.data.message)
+            } else {
+                alert('게시물 수정 중 오류가 발생했습니다.')
+            }
         },
     })
 
@@ -88,8 +110,10 @@ const PostComponent = () => {
         const content = e.target.content.value
         const idx = Number(postIdx)
 
+        //** */
+
         if (!title || !content) {
-            alert('제목과 내용을 입력해주세요.')
+            alert('제목, 내용을 모두 입력해주세요.')
             return
         }
 
@@ -105,8 +129,12 @@ const PostComponent = () => {
         onSuccess: () => {
             refetch() // Refetch posts after successful deletion
         },
-        onError: (error) => {
-            alert('게시물 삭제에 실패했습니다. 다시 시도해 주세요.')
+        onError: (error: any) => {
+            if (error.response && error.response.data) {
+                alert(error.response.data.message)
+            } else {
+                alert('게시물 삭제에 실패했습니다. 다시 시도해 주세요.')
+            }
         },
     })
 
@@ -127,6 +155,7 @@ const PostComponent = () => {
                 <button type="button">HOME</button>
             </Link>
             {/* Post creation form */}
+
             <form onSubmit={handleCreatePost}>
                 <label htmlFor="nickname">ID</label>
                 <input

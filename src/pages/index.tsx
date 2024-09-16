@@ -41,9 +41,9 @@ export default function Home() {
             return response.data
         },
         onSuccess: async () => {
+            await me.refetch()
             window.location.reload()
             alert('로그인이 완료되었습니다.')
-            await me.refetch()
         },
     })
 
@@ -53,9 +53,9 @@ export default function Home() {
             setNickname('') // ID 초기화
             setPassword('') // 비밀번호 초기화
 
+            await me.refetch()
             window.location.reload()
             alert('로그아웃이 완료되었습니다.')
-            await me.refetch()
         },
     })
 

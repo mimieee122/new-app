@@ -12,21 +12,29 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse) => {
     const cookies = parseCookies({ req })
     const token = cookies['token']
 
+    //****************************************** */
     if (!token) {
-        return res.status(401).json({ message: '토큰이 없습니다.' })
+        return res
+            .status(401)
+            .json({ message: '로그인 후 게시물 작성이 가능합니다.' })
     }
 
     try {
         // 토큰 검증 및 사용자 정보 추출
         const decoded = jwt.verify(token, process.env.SECRET_JWT as string) as {
             idx: number
+            nickname: string
         }
         const { title, content, nickname } = req.body
 
         if (!title || !content || !nickname) {
             return res
                 .status(400)
-                .json({ message: '제목, 내용, 닉네임 필수입니다.' })
+                .json({ message: 'ID, 제목, 내용 필수입니다.' })
+        } else if (decoded.nickname !== nickname) {
+            return res
+                .status(400)
+                .json({ message: '로그인 시 사용한 ID를 입력해 주세요.' })
         }
 
         // 게시물 생성 시 authorIdx를 JWT에서 추출한 사용자 idx로 설정

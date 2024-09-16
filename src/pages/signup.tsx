@@ -40,33 +40,37 @@ export default function Signup() {
     }
 
     return (
-        <div>
-            <div className="text-white mt-[40px]">
-                <button type="button" onClick={homePage}>
-                    HOME
-                </button>
+        <div
+            className={`${'signUp-bg'} flex flex-row justify-center w-screen h-screen`}
+        >
+            <div>
+                <div className="text-white mt-[40px]">
+                    <button type="button" onClick={homePage}>
+                        HOME
+                    </button>
+                </div>
+                <form
+                    onSubmit={signUp}
+                    className="flex flex-col gap-2 mt-[50px] w-96 text-black p-4 bg-white bg-opacity-40 rounded-xl"
+                >
+                    <p>회원가입</p>
+                    <label htmlFor="nickname">ID</label>
+                    <input
+                        type="text"
+                        placeholder="nickname"
+                        id="nickname"
+                        name="nickname"
+                    />
+                    <label htmlFor="password">password</label>
+                    <input
+                        type="password"
+                        placeholder="password"
+                        id="password"
+                        name="password"
+                    />
+                    <button type="submit">회원가입</button>
+                </form>
             </div>
-            <form
-                onSubmit={signUp}
-                className="flex flex-col gap-2 mt-[50px] w-96 text-black p-4 bg-gray-100 rounded-xl"
-            >
-                <p>회원가입</p>
-                <label htmlFor="nickname">ID</label>
-                <input
-                    type="text"
-                    placeholder="nickname"
-                    id="nickname"
-                    name="nickname"
-                />
-                <label htmlFor="password">password</label>
-                <input
-                    type="password"
-                    placeholder="password"
-                    id="password"
-                    name="password"
-                />
-                <button type="submit">회원가입</button>
-            </form>
         </div>
     )
 }

@@ -1,9 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 import { createPost } from '@/apis/posts/createPost'
 import { parseCookies } from 'nookies'
 import { verify, JwtPayload } from 'jsonwebtoken'
 import { geteveryPost } from '@/apis/posts/getPost'
+
+const prisma = new PrismaClient()
 
 interface DecodedToken extends JwtPayload {
     authorIdx: number
@@ -24,9 +26,9 @@ export default async function handler(
     try {
         // POST 요청 처리
         if (req.method === 'POST') {
-            const { title, content, nickname } = req.body
+            const { title, content } = req.body
 
-            if (!title || !content || !nickname) {
+            if (!title || !content) {
                 return res
                     .status(400)
                     .json({ message: '제목과 내용이 필요합니다.' })

@@ -31,11 +31,15 @@ html {
 }
 
 .default-bg {
-    @apply bg-[url('https://github.com/mimieee122/mslogo/blob/main/REALLOGINUI.jpg?raw=true')] bg-cover bg-no-repeat;
+    @apply bg-[url('https://github.com/mimieee122/mslogo/blob/main/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-09-15%20221847.png?raw=true')] bg-cover bg-no-repeat;
 }
 
 .logged-in-bg {
-    @apply bg-[url('https://github.com/mimieee122/mslogo/blob/main/REALWELCOMEUI.jpg?raw=true')] bg-cover bg-no-repeat;
+    @apply bg-[url('https://github.com/mimieee122/mslogo/blob/main/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-09-15%20221003.png?raw=true')] bg-cover bg-no-repeat;
+}
+
+.signUp-bg {
+    @apply bg-[url('https://github.com/mimieee122/mslogo/blob/main/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-09-15%20221052.png?raw=true')] bg-cover bg-no-repeat;
 }
 
 body {
