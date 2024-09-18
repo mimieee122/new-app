@@ -19,14 +19,11 @@ export const geteveryPost = async (
 export const getonePost = async (
     req: NextApiRequest,
     res: NextApiResponse,
-    idx: number
+    postIdx: number
 ) => {
     try {
         const post = await prisma.post.findUnique({
-            where: { idx: idx },
-            select: {
-                authorIdx: true,
-            },
+            where: { idx: postIdx },
         })
         return res.status(200).json(post)
     } catch {

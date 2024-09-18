@@ -5,7 +5,11 @@ import jwt from 'jsonwebtoken'
 
 const prisma = new PrismaClient()
 
-export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
+export const deletePost = async (
+    req: NextApiRequest,
+    res: NextApiResponse,
+    postIdx: number
+) => {
     const cookies = parseCookies({ req })
     const token = cookies['token']
 
@@ -19,7 +23,7 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
             idx: number
         }
 
-        const { authorIdx, postIdx } = req.body
+        const { authorIdx } = req.body
 
         if (decoded.idx !== authorIdx) {
             return res

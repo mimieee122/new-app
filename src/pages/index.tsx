@@ -165,7 +165,7 @@ export default function Home() {
 
                 <div className="flex flex-row w-[600px] gap-[5px] justify-center">
                     <Button onClick={logout}>로그아웃</Button>
-                    <Link href="/post">
+                    <Link href="/post/post">
                         <Button>게시판</Button>
                     </Link>
                 </div>

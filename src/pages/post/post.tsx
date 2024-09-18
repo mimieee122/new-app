@@ -244,6 +244,9 @@ const PostComponent = () => {
                                 >
                                     삭제
                                 </button>
+                                <Link href={`/post/${post.idx}`}>
+                                    <Button>보기</Button>
+                                </Link>
                             </div>
                         )}
                     </div>

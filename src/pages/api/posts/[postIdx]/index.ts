@@ -5,73 +5,57 @@ import { parseCookies } from 'nookies'
 import { verify } from 'jsonwebtoken'
 import { updatePost } from '@/apis/posts/updatePost'
 
-// API 핸들러 함수
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    // 환경 변수 가져오기
     const secret = process.env.SECRET_JWT
 
     if (!secret) {
+        console.error('JWT_SECRET is not defined.')
         return res.status(500).json({
             message: 'JWT_SECRET 환경 변수가 설정되지 않았습니다.',
         })
     }
 
-    // 쿠키에서 토큰 가져오기
-    // const cookies = parseCookies({ req })
-    // const token = cookies['token']
-
-    // if (!token) {
-    //     return res.status(401).json({ message: '토큰이 제공되지 않았습니다.' })
-    // }
-
     try {
-        // 토큰 검증
-        // const decoded = verify(token, secret) as any
+        // *** req.query.postIdx 라고 썼어야함 !!!!**************
+        const postIdx = Number(req.query.postIdx)
 
-        // 게시글 조회 (GET)
         if (req.method === 'GET') {
-            const post = await getonePost(req, res, Number(req.query.idx))
-            if (post === undefined) {
+            const post = await getonePost(req, res, postIdx)
+            if (post === null) {
                 return res
                     .status(404)
-                    .json({ message: '게시글을 찾을 수 없습니다.' })
+                    .json({ message: '게시물을 찾을 수 없습니다.' })
             }
-            return res.status(200).json(post)
+            return res.status(202).json(post)
         } else if (req.method === 'PUT') {
             const post = await updatePost(req, res)
+            if (post === null) {
+                return res
+                    .status(404)
+                    .json({ message: '게시물을 찾을 수 없습니다.' })
+            }
             return res.status(200).json(post)
         } else if (req.method === 'DELETE') {
-            const post = await deletePost(req, res)
-            return res.status(200).json(post)
-        }
-
-        // 게시글 삭제 (DELETE)
-        // if (req.method === 'DELETE') {
-        //     const post = await deletePost(req, res, Number(req.query.idx))
-        //     if (post === undefined) {
-        //         return res
-        //             .status(404)
-        //             .json({ message: '게시글을 찾을 수 없습니다.' })
-        //     }
-        //     // 권한 확인
-        //     if (decoded.authorIdx !== authorIdx) {
-        //         return res.status(403).json({ message: '권한이 없습니다.' })
-        //     }
-        //     // await deletePost(req, res, Number(req.query.idx))
-        //     return res.status(200).json({ message: '게시글이 삭제되었습니다.' })
-        // }
-
-        // 올바르지 않은 메서드
-        else {
+            const post = await deletePost(req, res, postIdx)
+            if (post === null) {
+                return res
+                    .status(404)
+                    .json({ message: '게시물을 찾을 수 없습니다.' })
+            }
+            return res.status(200).json({ message: '게시글이 삭제되었습니다.' })
+        } else {
             return res
                 .status(405)
-                .json({ message: '지원하지 않는 메서드입니다.' })
+                .json({ message: '허용되지 않은 메서드입니다.' })
         }
-    } catch (error) {
-        console.error('Token verification or API handling failed:', error)
-        return res.status(401).json({ message: '토큰이 올바르지 않습니다.' })
+    } catch (error: any) {
+        if (error.name === 'TokenExpiredError') {
+            return res.status(401).json({ message: '토큰이 만료되었습니다.' })
+        }
+        console.error('API error:', error)
+        return res.status(401).json({ message: '토큰 검증에 실패했습니다.' })
     }
 }
