@@ -73,7 +73,9 @@ body {
 }
 
 .signIn {
-    -webkit-text-stroke: 4px black;
+    font-family: 'PFStardust';
+
+    -webkit-text-stroke: 3px black;
 }
 
 .logIn {
@@ -82,4 +84,9 @@ body {
     background-color: white;
     border: blue 6px solid;
     border-radius: 10px;
+}
+
+.now {
+    font-family: 'PFStardust';
+    -webkit-text-stroke: 1.5px gray;
 }

@@ -42,7 +42,7 @@ export default function Home() {
         },
         onSuccess: async () => {
             setNickname(nickname)
-            await me.refetch()
+            me.refetch()
             //window.location.reload()
             alert('로그인이 완료되었습니다.')
         },
@@ -54,9 +54,9 @@ export default function Home() {
             setNickname('') // ID 초기화
             setPassword('') // 비밀번호 초기화
 
-            await me.refetch()
-            window.location.reload()
+            me.refetch()
             alert('로그아웃이 완료되었습니다.')
+            window.location.reload()
         },
     })
 
@@ -100,14 +100,18 @@ export default function Home() {
             <div className="blue text-black w-[1000px]  flex flex-col gap-[30px] justify-center items-center ">
                 <div className="text-black login ">
                     {me.isSuccess ? (
-                        <div className=" flex flex-col justify-center items-center  border-[#5fbfe9] border-[1px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 bg-opacity-40 rounded-xl">
-                            <p className="text-white underline">
-                                <span>현재 접속중인 유저 ID : </span>
-                                <span>{nickname}</span>
-                            </p>
-                            <p className="text-[40px] signIn text-black">
-                                로그인 성공!
-                            </p>
+                        <div className="flex flex-col gap-[10px] contents-center  justify-center">
+                            <div className=" flex flex-col justify-center items-center   border-gray-500 border-[3px] text-center gap-[30px] w-96 h-[50px] p-4 bg-white  rounded-xl">
+                                <p className="text-black text-center now ">
+                                    <span>현재 접속중인 유저 ID : </span>
+                                    <span>{nickname}</span>
+                                </p>
+                            </div>
+                            <div className=" flex flex-col justify-center items-center  border-[#3eb9ed] border-[5px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 bg-opacity-60 rounded-xl">
+                                <p className="text-[40px] signIn text-black">
+                                    로그인 성공
+                                </p>
+                            </div>
                         </div>
                     ) : (
                         <form
