@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import React from 'react'
@@ -13,6 +13,21 @@ export default function Home() {
         queryKey: ['me'],
         queryFn: async () => await axios.get('/api/me'),
     })
+
+    // 컴포넌트가 처음 렌더링될 때 localStorage에서 값을 가져옴
+    useEffect(() => {
+        const savedNickname = localStorage.getItem('nickname')
+        if (savedNickname) {
+            setNickname(savedNickname)
+        }
+    }, [])
+
+    // nickname이 변경될 때마다 localStorage에 저장
+    useEffect(() => {
+        if (nickname) {
+            localStorage.setItem('nickname', nickname)
+        }
+    }, [nickname])
 
     // mutation은 데이터를 변경하는 작업을 의미
     const loginMutation = useMutation({
@@ -150,7 +165,7 @@ export default function Home() {
 
                 <div className="flex flex-row w-[600px] gap-[5px] justify-center">
                     <Button onClick={logout}>로그아웃</Button>
-                    <Link href="/post" className="post-bg">
+                    <Link href="/post">
                         <Button>게시판</Button>
                     </Link>
                 </div>

@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
+import Button from '@/components/button'
+import Link from 'next/link'
 
 export default function Signup() {
     const signUpMutation = useMutation({
@@ -35,31 +37,25 @@ export default function Signup() {
         })
     }
 
-    const homePage = () => {
-        window.location.href = '/'
-    }
-
     return (
         <div
             className={`${'signUp-bg'} flex flex-row justify-center w-screen h-screen`}
         >
-            <div>
-                <div className="text-white mt-[40px]">
-                    <button type="button" onClick={homePage}>
-                        HOME
-                    </button>
-                </div>
+            <div className="flex flex-col gap-[60px]">
                 <form
                     onSubmit={signUp}
-                    className="flex flex-col gap-2 mt-[50px] w-96 text-black p-4 bg-white bg-opacity-40 rounded-xl"
+                    className="flex flex-col  login border-black border-[2px] border-solid gap-[20px] justify-center items-center mt-[150px] w-[1000px] h-[400px] text-black p-4 bg-white bg-opacity-40 rounded-xl"
                 >
-                    <p>회원가입</p>
+                    <p className="signIn text-[40px] text-center">
+                        CREATE ACCOUNT
+                    </p>
                     <label htmlFor="nickname">ID</label>
                     <input
                         type="text"
-                        placeholder="nickname"
+                        placeholder="ID"
                         id="nickname"
                         name="nickname"
+                        className="text-center"
                     />
                     <label htmlFor="password">password</label>
                     <input
@@ -67,9 +63,16 @@ export default function Signup() {
                         placeholder="password"
                         id="password"
                         name="password"
+                        className="text-center mb-[20px]"
                     />
-                    <button type="submit">회원가입</button>
+                    <Button>회원가입</Button>
                 </form>
+
+                <div className="mt-[40px] login">
+                    <Link href={'/'}>
+                        <Button>HOME</Button>
+                    </Link>
+                </div>
             </div>
         </div>
     )
