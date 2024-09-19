@@ -59,7 +59,7 @@ export default function PostDetail() {
             await axios.delete(`/api/posts/${idx}`, { data: { postIdx: idx } })
         },
         onSuccess: () => {
-            refetch() // Refetch posts after successful deletion
+            window.location.href = '/post/post' // Refetch posts after successful deletion
         },
         onError: (error: any) => {
             if (error.response && error.response.data) {
@@ -86,7 +86,7 @@ export default function PostDetail() {
     }, [editingPost, idx, postTitle, postContent])
 
     return (
-        <div>
+        <div className="text-white">
             {editingPost === idx ? (
                 <form onSubmit={(e) => handleUpdatePost(e)}>
                     <input

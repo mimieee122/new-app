@@ -31,7 +31,7 @@ export default async function handler(
             }
             return res.status(202).json(post)
         } else if (req.method === 'PUT') {
-            const post = await updatePost(req, res)
+            const post = await updatePost(req, res, postIdx)
             if (post === null) {
                 return res
                     .status(404)
