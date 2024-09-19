@@ -16,12 +16,12 @@ export const updatePost = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         //토큰 검증 및 사용자 정보 추출
         const decoded = jwt.verify(token, process.env.SECRET_JWT as string) as {
-            idx: number
+            authorIdx: number
         }
 
         const { idx, authorIdx, title, content } = req.body
 
-        if (decoded.idx !== authorIdx) {
+        if (decoded.authorIdx !== authorIdx) {
             return res
                 .status(400)
                 .json({ message: '게시물을 수정할 권한이 없습니다.' })
