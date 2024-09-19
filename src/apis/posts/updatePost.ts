@@ -19,7 +19,7 @@ export const updatePost = async (req: NextApiRequest, res: NextApiResponse) => {
             idx: number
         }
 
-        const { title, content, postIdx, authorIdx } = req.body
+        const { idx, authorIdx, title, content } = req.body
 
         if (decoded.idx !== authorIdx) {
             return res
@@ -28,7 +28,7 @@ export const updatePost = async (req: NextApiRequest, res: NextApiResponse) => {
         }
 
         const post = await prisma.post.update({
-            where: { idx: postIdx }, //*
+            where: { idx: idx }, //*
             data: {
                 title: title,
                 content: content,
