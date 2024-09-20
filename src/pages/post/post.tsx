@@ -61,51 +61,60 @@ const PostComponent = () => {
     }
 
     return (
-        <div className="text-white flex flex-col gap-[10px]">
+        <div>
             <Link href={'/'}>
-                <button type="button">HOME</button>
+                <button className="text-white mt-[30px]" type="button">
+                    HOME
+                </button>
             </Link>
+            <div className="mt-[50px] text-white flex flex-row w-full h-full gap-[200px]">
+                {/* Post creation form */}
+                <form
+                    onSubmit={handleCreatePost}
+                    className="flex flex-col w-[500px] h-[300px] border-white border-[3px] border-solid rounded-md p-5 gap-[10px]"
+                >
+                    <label htmlFor="nickname">ID</label>
+                    <input
+                        className="text-black"
+                        type="text"
+                        id="nickname"
+                        name="nickname"
+                        required
+                    />
+                    <label htmlFor="title">제목</label>
+                    <input
+                        className="text-black"
+                        type="text"
+                        id="title"
+                        name="title"
+                        required
+                    />
+                    <label htmlFor="content">내용</label>
+                    <textarea
+                        className="text-black"
+                        id="content"
+                        name="content"
+                        required
+                    ></textarea>
+                    <button type="submit">게시글 작성</button>
+                </form>
 
-            {/* Post creation form */}
-            <form onSubmit={handleCreatePost}>
-                <label htmlFor="nickname">ID</label>
-                <input
-                    className="text-black"
-                    type="text"
-                    id="nickname"
-                    name="nickname"
-                    required
-                />
-                <label htmlFor="title">제목</label>
-                <input
-                    className="text-black"
-                    type="text"
-                    id="title"
-                    name="title"
-                    required
-                />
-                <label htmlFor="content">내용</label>
-                <textarea
-                    className="text-black"
-                    id="content"
-                    name="content"
-                    required
-                ></textarea>
-                <button type="submit">게시글 작성</button>
-            </form>
-
-            {/* Display posts */}
-            <div>
-                {posts?.map((post: any) => (
-                    <div className="flex flex-row gap-[10px]" key={post.idx}>
-                        <h2>ID : {post.nickname}</h2>
-                        <h2>제목 : {post.title}</h2>
-                        <p>내용 : {post.content}</p>
-                        <Link href={`/post/${post.idx}`}>
-                            <Button>보기</Button>
-                        </Link>
-                    </div>
-                ))}
+                {/* Display posts */}
+                <div className="mt-[100px]">
+                    {posts?.map((post: any) => (
+                        <div
+                            className="flex flex-row gap-[10px]"
+                            key={post.idx}
+                        >
+                            <h2>ID : {post.nickname}</h2>
+                            <h2>제목 : {post.title}</h2>
+                            {/* <p>내용 : {post.content}</p> */}
+                            <Link href={`/post/${post.idx}`}>
+                                <Button>보기</Button>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )

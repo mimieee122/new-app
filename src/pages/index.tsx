@@ -52,6 +52,7 @@ export default function Home() {
                 )
                 throw new Error('로그인 실패: 유효하지 않은 데이터입니다.')
             }
+
             localStorage.setItem('authorIdx', authorIdx)
             return response.data
         },
@@ -60,6 +61,11 @@ export default function Home() {
             me.refetch()
             //window.location.reload()
             alert('로그인이 완료되었습니다.')
+        },
+        onError: (error: any) => {
+            if (error.response && error.response.data) {
+                alert(error.response.data.message)
+            }
         },
     })
 
