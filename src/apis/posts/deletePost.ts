@@ -50,7 +50,7 @@ export const deletePost = async (
         const post = await prisma.post.delete({
             where: { idx: postIdx },
         })
-        res.status(201).json(post)
+        res.status(200).json(post)
     } catch (error) {
         console.error('게시물 삭제 중 오류 발생:', error)
         return res.status(500).json({ message: '게시물 삭제에 실패했습니다.' })
