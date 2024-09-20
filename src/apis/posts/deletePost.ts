@@ -21,6 +21,7 @@ export const deletePost = async (
         //토큰 검증 및 사용자 정보 추출
         const decoded = jwt.verify(token, process.env.SECRET_JWT as string) as {
             idx: number
+            nickname: string
         }
 
         // ***********************************
@@ -30,7 +31,7 @@ export const deletePost = async (
         const posts = await prisma.post.findUnique({
             where: { idx: postIdx },
             select: {
-                authorIdx: true,
+                nickname: true,
             },
         })
 
@@ -40,7 +41,7 @@ export const deletePost = async (
                 .json({ message: '게시물을 찾을 수 없습니다.' })
         }
 
-        if (decoded.idx !== posts.authorIdx) {
+        if (decoded.nickname !== posts.nickname) {
             return res
                 .status(400)
                 .json({ message: '게시물을 삭제할 권한이 없습니다' })

@@ -47,7 +47,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
 
         const token = await sign(payload, process.env.SECRET_JWT as any, {
-            expiresIn: '0.1h',
+            expiresIn: '24h',
         })
 
         setCookie({ res }, 'token', token, {

@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useMutation } from '@tanstack/react-query'
+import Link from 'next/link'
 
 export default function PostDetail() {
     const router = useRouter()
@@ -59,7 +60,8 @@ export default function PostDetail() {
             await axios.delete(`/api/posts/${idx}`, { data: { postIdx: idx } })
         },
         onSuccess: () => {
-            window.location.href = '/post/post' // Refetch posts after successful deletion
+            // 캐시에서 해당 게시물 제거
+            router.push('/post/post') // 목록 페이지로 리디렉션
         },
         onError: (error: any) => {
             if (error.response && error.response.data) {
@@ -70,23 +72,37 @@ export default function PostDetail() {
         },
     })
 
-    // 데이터를 구조 분해 할당 (post가 null일 수 있으므로 기본값 설정)
-    const {
-        title: postTitle = '제목 없음',
-        content: postContent = '내용 없음',
-        nickname = '익명',
-    } = post || {}
-
-    // 수정 모드로 전환할 때 상태 업데이트
+    // 게시물 수정 모드로 전환할 때 상태 업데이트
     useEffect(() => {
-        if (editingPost === idx) {
-            setTitle(postTitle)
-            setContent(postContent)
+        if (editingPost === idx && post) {
+            setTitle(post.title)
+            setContent(post.content)
         }
-    }, [editingPost, idx, postTitle, postContent])
+    }, [editingPost, idx, post])
+
+    // 게시물이 존재하지 않을 경우 처리
+    if (!post) {
+        return <div className="text-white">게시물이 존재하지 않습니다.</div>
+    }
 
     return (
         <div className="text-white">
+            <Link href={'/'}>
+                <button
+                    className="text-white text-[20px] ml-[50px] mt-[30px] "
+                    type="button"
+                >
+                    HOME
+                </button>
+            </Link>
+            <Link href={'/post/post'}>
+                <button
+                    className="text-white text-[20px] ml-[50px] mt-[30px] "
+                    type="button"
+                >
+                    뒤로가기
+                </button>
+            </Link>
             {editingPost === idx ? (
                 <form onSubmit={(e) => handleUpdatePost(e)}>
                     <input
@@ -111,9 +127,9 @@ export default function PostDetail() {
                 </form>
             ) : (
                 <div className="text-white">
-                    <h2>제목: {postTitle}</h2>
-                    <p>내용: {postContent}</p>
-                    <p>작성자: {nickname}</p>
+                    <h2>제목: {post.title}</h2>
+                    <p>내용: {post.content}</p>
+                    <p>작성자: {post.nickname}</p>
                     <button onClick={() => setEditingPost(idx)}>수정</button>
                     <button
                         onClick={() => {

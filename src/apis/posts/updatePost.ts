@@ -21,6 +21,7 @@ export const updatePost = async (
         //토큰 검증 및 사용자 정보 추출
         const decoded = jwt.verify(token, process.env.SECRET_JWT as string) as {
             idx: number
+            nickname: string
         }
 
         const { title, content } = req.body
@@ -28,7 +29,7 @@ export const updatePost = async (
         // 게시물 정보 가져오기
         const posts = await prisma.post.findUnique({
             where: { idx: postIdx },
-            select: { authorIdx: true }, // 작성자 ID만 가져오기
+            select: { nickname: true }, // 작성자 ID만 가져오기
         })
 
         if (!posts) {
@@ -37,7 +38,7 @@ export const updatePost = async (
                 .json({ message: '게시물을 찾을 수 없습니다.' })
         }
 
-        if (decoded.idx !== posts.authorIdx) {
+        if (decoded.nickname !== posts.nickname) {
             return res
                 .status(400)
                 .json({ message: '게시물을 수정할 권한이 없습니다.' })
