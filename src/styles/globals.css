@@ -48,6 +48,10 @@ html {
     @apply bg-[url('https://github.com/mimieee122/mslogo/blob/main/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-09-21%20150723.png?raw=true')] bg-cover bg-no-repeat;
 }
 
+.detail-bg {
+    @apply bg-[url('https://github.com/mimieee122/mslogo/blob/main/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-09-21%20155912.png?raw=true')] bg-cover bg-no-repeat;
+}
+
 body {
     display: flex;
     flex-direction: row;

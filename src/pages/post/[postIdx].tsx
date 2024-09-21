@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import Link from 'next/link'
+import Button from '@/components/button'
 
 export default function PostDetail() {
     const router = useRouter()
@@ -86,64 +87,87 @@ export default function PostDetail() {
     }
 
     return (
-        <div className="text-white">
-            <Link href={'/'}>
-                <button
-                    className="text-white text-[20px] ml-[50px] mt-[30px] "
-                    type="button"
-                >
-                    HOME
-                </button>
-            </Link>
-            <Link href={'/post/post'}>
-                <button
-                    className="text-white text-[20px] ml-[50px] mt-[30px] "
-                    type="button"
-                >
-                    뒤로가기
-                </button>
-            </Link>
+        <div
+            className={`${'detail-bg'} w-screen min-h-screen  flex flex-col gap-[10px] justify-center items-center text-white`}
+        >
+            <div className="flex flex-row self-center pb-0 mb-0 mt-[20px] text-black font-extrabold gap-[10px]">
+                <Link href={'/'}>
+                    <Button>HOME</Button>
+                </Link>
+                <Link href={'/post/post'}>
+                    <Button>뒤로가기</Button>
+                </Link>
+            </div>
             {editingPost === idx ? (
-                <form onSubmit={(e) => handleUpdatePost(e)}>
-                    <input
-                        type="text"
-                        onChange={(e) => setTitle(e.target.value)} // 상태 업데이트
-                        value={title}
-                        name="title"
-                        className="text-black"
-                        required
-                    />
-                    <textarea
-                        onChange={(e) => setContent(e.target.value)} // 상태 업데이트
-                        value={content}
-                        name="content"
-                        required
-                        className="text-black"
-                    ></textarea>
+                <form
+                    onSubmit={(e) => handleUpdatePost(e)}
+                    className="text-black flex flex-col mt-[10px] p-2 items-center justify-between bg-white rounded-xl bg-opacity-70 w-[1000px] h-[400px] border-black border-[3px]"
+                >
+                    <div>
+                        <p>제목 : </p>
+                        <input
+                            type="text"
+                            onChange={(e) => setTitle(e.target.value)} // 상태 업데이트
+                            value={title}
+                            name="title"
+                            className="now text-center underline text-[30px]"
+                        />
+
+                        <textarea
+                            onChange={(e) => setContent(e.target.value)} // 상태 업데이트
+                            value={content}
+                            name="content"
+                            className="flex flex-col text-center p-3 index gap-[15px] w-[500px] mt-[10px] h-[250px] border-black border-[1px]"
+                        >
+                            <p className="self-center index underline text-[25px]">
+                                내용{' '}
+                            </p>
+                        </textarea>
+                    </div>
                     <button type="submit">게시글 수정</button>
                     <button type="button" onClick={() => setEditingPost(null)}>
                         취소
                     </button>
                 </form>
             ) : (
-                <div className="text-white">
-                    <h2>제목: {post.title}</h2>
-                    <p>내용: {post.content}</p>
-                    <p>작성자: {post.nickname}</p>
-                    <button onClick={() => setEditingPost(idx)}>수정</button>
-                    <button
-                        onClick={() => {
-                            if (
-                                window.confirm(
-                                    '정말로 이 게시물을 삭제하시겠습니까?'
-                                )
-                            ) {
-                                deletePostMutation.mutate(idx)
-                            }
-                        }}
-                    >
-                        삭제
-                    </button>
+                <div className="text-black flex flex-col p-2 items-center mt-[10px] justify-between bg-white rounded-xl bg-opacity-70 w-[1000px] h-[400px] border-black border-[3px]">
+                    <div>
+                        <h2 className="now text-center underline text-[30px]">
+                            제목 : {post.title}
+                        </h2>
+                        <p className="font-extrabold">
+                            {' '}
+                            → 작성자: {post.nickname}
+                        </p>
+                        <div className="flex flex-col text-center p-3 index gap-[15px] w-[500px] mt-[10px] h-[250px] border-black border-[1px]">
+                            <p className="self-center index underline text-[25px]">
+                                내용{' '}
+                            </p>
+                            <p className="text-[20px]">{post.content}</p>
+                        </div>
+                    </div>
+                    <div className="flex flex-row gap-[20px]">
+                        <button
+                            className="w-[130px] h-[30px] font-extrabold bg-black text-white border-black border-[1px] rounded-md"
+                            onClick={() => setEditingPost(idx)}
+                        >
+                            수정
+                        </button>
+                        <button
+                            className="w-[130px] h-[30px] font-extrabold bg-black text-white border-black border-[1px] rounded-md"
+                            onClick={() => {
+                                if (
+                                    window.confirm(
+                                        '정말로 이 게시물을 삭제하시겠습니까?'
+                                    )
+                                ) {
+                                    deletePostMutation.mutate(idx)
+                                }
+                            }}
+                        >
+                            삭제
+                        </button>
+                    </div>
                 </div>
             )}
         </div>

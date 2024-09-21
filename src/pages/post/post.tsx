@@ -79,9 +79,9 @@ const PostComponent = () => {
 
                     <form
                         onSubmit={handleCreatePost}
-                        className="flex flex-col text-center shadow-lg shadow-[0_0_10px_#000000] transition-shadow font-extrabold  border-[black] border-[4px]  w-[400px] h-[290px]   text-black  bg-[#028cc8] bg-opacity-80  rounded-3xl p-5 gap-[12px]"
+                        className="flex flex-col text-center  shadow-[0_0_20px_#ffffff] transition-shadow font-extrabold  border-[#758991] border-[2px]  w-[400px] h-[290px]   text-black  bg-[black] bg-opacity-80  rounded-3xl p-5 gap-[12px]"
                     >
-                        <div className="index text-[black] mb-[0px]   text-[35px]">
+                        <div className="write text-[white] mb-[0px]   text-[35px]">
                             WRITE
                         </div>
                         <label htmlFor="nickname"></label>
@@ -125,7 +125,7 @@ const PostComponent = () => {
                         </div>
                         {posts?.map((post: any) => (
                             <div
-                                className="flex flex-row  justify-between w-[500px] h-[50px] text-black  bg-white  border-black border-[1px]  gap-[10px]"
+                                className="flex flex-row  justify-between w-[500px] h-[50px] text-black  bg-white bg-opacity-70  border-black border-[1px]  gap-[10px]"
                                 key={post.idx}
                             >
                                 <div className="flex flex-row gap-[5px] ml-[10px]">
@@ -139,7 +139,7 @@ const PostComponent = () => {
                                 </div>
                                 {/* <p>내용 : {post.content}</p> */}
                                 <Link href={`/post/${post.idx}`}>
-                                    <button className="w-[100px] h-[40px] write shadow-lg hover:shadow-[0_0_10px_#028cc8] transition-shadow text-white font-extrabold m-1 bg-[#028cc8]  border-black rounded-md border-[2px]">
+                                    <button className="w-[100px] h-[40px] write shadow-lg hover:shadow-[0_0_10px_#758991] transition-shadow text-white font-extrabold m-1 bg-[#758991]  border-black rounded-md border-[2px]">
                                         보기
                                     </button>
                                 </Link>
