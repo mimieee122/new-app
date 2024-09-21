@@ -18,7 +18,7 @@ const Button = ({
     return (
         <button
             onClick={onClick}
-            className="w-[200px] h-[40px] bg-[#5fbfe9] bg-opacity-50 border-black border-[2px] border-solid rounded-md"
+            className="w-[200px] h-[40px]  shadow-2xl hover:shadow-[0_0_10px_white] transition-shadow bg-[#5fbfe9] bg-opacity-50 border-black border-[2px] border-solid rounded-md"
         >
             {children}
         </button>

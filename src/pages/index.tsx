@@ -116,7 +116,7 @@ export default function Home() {
         <div
             className={`${
                 me.isSuccess ? 'logged-in-bg' : 'default-bg'
-            } flex flex-row justify-center w-screen h-screen`}
+            } flex flex-row justify-center w-screen min-h-screen`}
         >
             <div className="blue text-black w-[1000px]  flex flex-col gap-[30px] justify-center items-center ">
                 <div className="text-black login ">

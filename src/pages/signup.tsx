@@ -39,12 +39,12 @@ export default function Signup() {
 
     return (
         <div
-            className={`${'signUp-bg'} flex flex-row justify-center w-screen h-screen`}
+            className={`${'signUp-bg'} flex flex-row justify-center w-screen min-h-screen`}
         >
             <div className="flex flex-col gap-[50px]">
                 <form
                     onSubmit={signUp}
-                    className="flex flex-col  login border-black border-[2px] border-solid gap-[20px] justify-center items-center mt-[200px] w-[1000px] h-[400px] text-black p-4 bg-white bg-opacity-40 rounded-xl"
+                    className="flex flex-col  login border-black border-[2px] border-solid gap-[20px] justify-center items-center mt-[200px] w-[900px] h-[400px] text-black p-4 bg-white bg-opacity-40 rounded-xl"
                 >
                     <p className="signIn text-[40px] text-center">
                         CREATE ACCOUNT

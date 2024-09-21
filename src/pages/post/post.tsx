@@ -61,29 +61,27 @@ const PostComponent = () => {
     }
 
     return (
-        <div className={`${'post-bg'} w-screen h-screen`}>
+        <div className={`${'post-bg'} w-screen min-h-screen`}>
             <div className="flex flex-col gap-[0px]">
                 <Link href={'/'}>
                     <button
-                        className="text-black h-[40px] w-[100px] bg-white bg-opacity-40 rounded-xl font-extrabold text-[25px] mr-[200px]   "
+                        className="text-black mt-[2px] h-[40px] w-[100px] bg-white bg-opacity-40 rounded-xl font-extrabold text-[25px] mr-[200px]   "
                         type="button"
                     >
                         HOME
                     </button>
                 </Link>
                 <div className=" w-screen  h-[80px] bg-white  self-center flex flex-row justify-start bg-opacity-0 gap-[100px]">
-                    <p className="signIn board text-[80px] ml-[40px] mt-[30px] underline self-center  text-center">
-                        BOARD
-                    </p>
+                    <p className="signIn board text-[70px] ml-[40px] mt-[30px] underline self-center  text-center"></p>
                 </div>
-                <div className="mt-[20px]   flex flex-row justify-end w-full h-full gap-[30px]">
+                <div className="mt-[50px]   flex flex-row justify-end w-full h-full gap-[30px]">
                     {/* Post creation form */}
 
                     <form
                         onSubmit={handleCreatePost}
-                        className="flex flex-col text-center font-extrabold  border-[white] border-[1px]  w-[400px] h-[290px]   text-black  bg-[black] bg-opacity-70  rounded-3xl p-5 gap-[12px]"
+                        className="flex flex-col text-center shadow-lg shadow-[0_0_10px_#000000] transition-shadow font-extrabold  border-[black] border-[4px]  w-[400px] h-[290px]   text-black  bg-[#028cc8] bg-opacity-80  rounded-3xl p-5 gap-[12px]"
                     >
-                        <div className="write text-[white] mb-[0px]   text-[30px]">
+                        <div className="index text-[black] mb-[0px]   text-[35px]">
                             WRITE
                         </div>
                         <label htmlFor="nickname"></label>
@@ -113,7 +111,7 @@ const PostComponent = () => {
                             required
                         ></textarea>
                         <button
-                            className="text-[18px] font-extrabold self-center text-black  w-[200px] h-[50px] bg-[white] bg-opacity-90 border-black border-[2.5px] rounded-md"
+                            className="text-[18px] font-extrabold self-center shadow-lg hover:shadow-[0_0_10px_white] transition-shadow text-black  w-[200px] h-[50px] bg-[white] bg-opacity-90 border-black border-[2.5px] rounded-md"
                             type="submit"
                         >
                             게시물 작성
@@ -122,7 +120,7 @@ const PostComponent = () => {
 
                     {/* Display posts */}
                     <div className="index">
-                        <div className="text-center write text-white font-extrabold  border-t-black border-b-black border-t-4 border-b-4 mb-[15px]   bg-[black] w-[500px] bg-opacity-50  text-[30px]">
+                        <div className="text-center write  text-white font-extrabold  border-t-black border-b-black border-t-4 border-b-4 mb-[15px]   bg-[black] w-[500px] bg-opacity-70  text-[30px]">
                             INDEX
                         </div>
                         {posts?.map((post: any) => (
@@ -141,7 +139,7 @@ const PostComponent = () => {
                                 </div>
                                 {/* <p>내용 : {post.content}</p> */}
                                 <Link href={`/post/${post.idx}`}>
-                                    <button className="w-[100px] h-[40px] font-extrabold m-1 bg-black bg-opacity-50 border-black rounded-md border-[1px]">
+                                    <button className="w-[100px] h-[40px] write shadow-lg hover:shadow-[0_0_10px_#028cc8] transition-shadow text-white font-extrabold m-1 bg-[#028cc8]  border-black rounded-md border-[2px]">
                                         보기
                                     </button>
                                 </Link>
