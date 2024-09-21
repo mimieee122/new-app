@@ -90,7 +90,7 @@ export default function PostDetail() {
         <div
             className={`${'detail-bg'} w-screen min-h-screen  flex flex-col gap-[10px] justify-center items-center text-white`}
         >
-            <div className="flex flex-row self-center pb-0 mb-0 mt-[20px] text-black font-extrabold gap-[10px]">
+            <div className="flex flex-row self-center  pb-0 mb-0 mt-[40px] text-black font-extrabold gap-[10px]">
                 <Link href={'/'}>
                     <Button>HOME</Button>
                 </Link>
@@ -139,7 +139,7 @@ export default function PostDetail() {
                             {' '}
                             → 작성자: {post.nickname}
                         </p>
-                        <div className="flex flex-col text-center p-3 index gap-[15px] w-[500px] mt-[10px] h-[250px] border-black border-[1px]">
+                        <div className="flex flex-col text-center p-3 index gap-[15px] w-[500px] mt-[10px] h-[250px] bg-white border-black border-[1px]">
                             <p className="self-center index underline text-[25px]">
                                 내용{' '}
                             </p>

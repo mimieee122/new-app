@@ -125,7 +125,7 @@ const PostComponent = () => {
                         </div>
                         {posts?.map((post: any) => (
                             <div
-                                className="flex flex-row  justify-between w-[500px] h-[50px] text-black  bg-white bg-opacity-70  border-black border-[1px]  gap-[10px]"
+                                className="flex flex-row  justify-between w-[500px] h-[50px] text-black  bg-white bg-opacity-90  border-black border-[0.5px]  gap-[10px]"
                                 key={post.idx}
                             >
                                 <div className="flex flex-row gap-[5px] ml-[10px]">
