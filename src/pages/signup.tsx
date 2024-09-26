@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import Button from '@/components/button'
 import Link from 'next/link'
+import { toast } from 'react-toastify'
 
 export default function Signup() {
     const signUpMutation = useMutation({
@@ -13,7 +14,7 @@ export default function Signup() {
             }),
         onSuccess: () => {
             window.location.href = '/'
-            alert('회원가입이 완료되었습니다.')
+            toast.success('회원가입이 완료되었습니다.')
         },
     })
 
