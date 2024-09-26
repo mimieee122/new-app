@@ -23,11 +23,7 @@ const PostComponent = () => {
 
     // Mutation for creating a post
     const createPostMutation = useMutation({
-        mutationFn: async (data: {
-            nickname: string
-            title: string
-            content: string
-        }) => {
+        mutationFn: async (data: { title: string; content: string }) => {
             try {
                 await axios.post('/api/posts', data)
             } catch (error: any) {
@@ -48,16 +44,15 @@ const PostComponent = () => {
     const handleCreatePost = (e: any) => {
         e.preventDefault()
 
-        const nickname = posts.data.nickname
         const title = e.target.title.value
         const content = e.target.content.value
 
-        if (!title || !content || !nickname) {
-            alert('제목과 내용, 작성자를 입력해주세요.')
+        if (!title || !content) {
+            alert('제목과 내용 입력해주세요.')
             return
         }
 
-        createPostMutation.mutate({ nickname, title, content })
+        createPostMutation.mutate({ title, content })
     }
 
     return (

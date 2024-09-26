@@ -25,6 +25,7 @@ export const getonePost = async (
         const post = await prisma.post.findUnique({
             where: { idx: postIdx },
         })
+
         return res.status(200).json(post)
     } catch {
         res.status(500).json({ message: 'error' })
