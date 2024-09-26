@@ -53,10 +53,7 @@ export function useLogin() {
         onSuccess: async () => {
             setNickname('') // ID 초기화
             setPassword('') // 비밀번호 초기화
-            // setNickname(nickname)
             me.refetch()
-
-            //window.location.reload()
             toast.success('로그인이 완료되었습니다.')
         },
         onError: (error: any) => {

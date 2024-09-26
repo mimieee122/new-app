@@ -49,7 +49,7 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse) => {
             data: {
                 title,
                 content,
-                nickname: user.nickname,
+                nickname: String(user.nickname),
                 authorIdx: Number(decoded.idx), // 토큰에서 추출한 사용자 idx 사용
             },
         })
