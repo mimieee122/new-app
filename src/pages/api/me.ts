@@ -18,11 +18,12 @@ export default function me(req: NextApiRequest, res: NextApiResponse) {
     try {
         payload = verify(token, process.env.SECRET_JWT as any)
 
-        const { nickname } = payload as JwtPayload
+        const { nickname, idx } = payload as JwtPayload
         return res.status(200).json({
             status: 'success',
             message: '올바르게 토큰 제공 완료',
             nickname,
+            idx,
         })
     } catch {
         return res
