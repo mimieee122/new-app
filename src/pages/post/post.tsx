@@ -48,7 +48,7 @@ const PostComponent = () => {
     const handleCreatePost = (e: any) => {
         e.preventDefault()
 
-        const nickname = e.target.nickname.value
+        const nickname = posts.data.nickname
         const title = e.target.title.value
         const content = e.target.content.value
 
@@ -84,15 +84,7 @@ const PostComponent = () => {
                         <div className="write text-[white] mb-[0px]   text-[35px]">
                             WRITE
                         </div>
-                        <label htmlFor="nickname"></label>
-                        <input
-                            className="text-black"
-                            type="text"
-                            id="nickname"
-                            name="nickname"
-                            placeholder="ID"
-                            required
-                        />
+
                         <label htmlFor="title"></label>
                         <input
                             className="text-black"
@@ -132,9 +124,6 @@ const PostComponent = () => {
                                     <h2>제목 : </h2>
                                     <h2 className=" text-[20px] font-bold">
                                         {post.title}
-                                    </h2>
-                                    <h2 className="underline">
-                                        - 작성자 : {post.nickname}
                                     </h2>
                                 </div>
                                 {/* <p>내용 : {post.content}</p> */}
