@@ -60,7 +60,7 @@ const PostComponent = () => {
             <div className="flex flex-col gap-[0px]">
                 <Link href={'/'}>
                     <button
-                        className="text-black mt-[2px] h-[40px] w-[100px] bg-white bg-opacity-40 rounded-xl font-extrabold text-[25px] mr-[200px]   "
+                        className="text-black ml-[10px] mt-[10px] h-[40px] w-[100px] bg-white bg-opacity-40 rounded-xl font-extrabold text-[25px] mr-[200px]   "
                         type="button"
                     >
                         HOME
@@ -74,7 +74,7 @@ const PostComponent = () => {
 
                     <form
                         onSubmit={handleCreatePost}
-                        className="flex flex-col text-center  shadow-[0_0_20px_#ffffff] transition-shadow font-extrabold  border-[#758991] border-[2px]  w-[400px] h-[290px]   text-black  bg-[black] bg-opacity-80  rounded-3xl p-5 gap-[12px]"
+                        className="flex flex-col text-center  shadow-[0_0_20px_#ffffff] transition-shadow font-extrabold  border-[#758991] border-[2px]  w-[400px] h-[290px]   text-black  bg-[black] bg-opacity-20  rounded-3xl p-5 gap-[12px]"
                     >
                         <div className="write text-[white] mb-[0px]   text-[35px]">
                             WRITE
@@ -98,7 +98,7 @@ const PostComponent = () => {
                             required
                         ></textarea>
                         <button
-                            className="text-[18px] font-extrabold self-center shadow-lg hover:shadow-[0_0_10px_white] transition-shadow text-black  w-[200px] h-[50px] bg-[white] bg-opacity-90 border-black border-[2.5px] rounded-md"
+                            className="text-[18px] font-extrabold self-center shadow-lg hover:shadow-[0_0_10px_white] transition-shadow text-black mt-[25px]  w-[200px] h-[50px] bg-[white]  border-black border-[2.5px] rounded-md"
                             type="submit"
                         >
                             게시물 작성
@@ -107,7 +107,7 @@ const PostComponent = () => {
 
                     {/* Display posts */}
                     <div className="index">
-                        <div className="text-center write  text-white font-extrabold  border-t-black border-b-black border-t-4 border-b-4 mb-[15px]   bg-[black] w-[500px] bg-opacity-70  text-[30px]">
+                        <div className="text-center index  text-black font-extrabold  border-t-black border-b-black border-t-4 border-b-4 mb-[15px]   bg-[#97d0ff] w-[500px]   text-[30px]">
                             INDEX
                         </div>
                         {posts?.map((post: any) => (
@@ -123,7 +123,7 @@ const PostComponent = () => {
                                 </div>
                                 {/* <p>내용 : {post.content}</p> */}
                                 <Link href={`/post/${post.idx}`}>
-                                    <button className="w-[100px] h-[40px] write shadow-lg hover:shadow-[0_0_10px_#758991] transition-shadow text-white font-extrabold m-1 bg-[#758991]  border-black rounded-md border-[2px]">
+                                    <button className="w-[100px] h-[40px] index shadow-lg hover:shadow-[0_0_10px_#758991] transition-shadow text-black font-extrabold m-1 bg-[#97d0ff]  border-black rounded-md border-[2px]">
                                         보기
                                     </button>
                                 </Link>

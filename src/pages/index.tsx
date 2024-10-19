@@ -20,7 +20,6 @@ export default function Home() {
     const logoutMutation = useMutation({
         mutationFn: async () => await axios.post('/api/logout'),
         onSuccess: async () => {
-            me.refetch()
             toast.success('로그아웃이 완료되었습니다.')
             window.location.reload()
         },
@@ -65,7 +64,7 @@ export default function Home() {
                             <div className=" flex flex-col justify-center items-center   border-gray-500 border-[3px] text-center gap-[30px] w-96 h-[50px] p-4 bg-white bg-opacity-70  rounded-xl">
                                 <p className="text-black text-center now ">
                                     <span>현재 접속중인 유저 ID : </span>
-                                    <span>{me.data.data.nickname}</span>
+                                    <span>{me?.data?.data?.nickname}</span>
                                 </p>
                             </div>
                             <div className=" flex flex-col justify-center items-center  border-[#3eb9ed] border-[5px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 bg-opacity-60 rounded-xl">

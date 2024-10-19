@@ -8,7 +8,7 @@ import Button from '@/components/button'
 
 export default function PostDetail() {
     const router = useRouter()
-    const { postIdx } = router.query // URL에서 postIdx 가져오기
+    const postIdx = router.query.postIdx // URL에서 postIdx 가져오기
     const idx = Number(postIdx)
 
     const [editingPost, setEditingPost] = useState<number | null>(null)
@@ -83,7 +83,7 @@ export default function PostDetail() {
 
     // 게시물이 존재하지 않을 경우 처리
     if (!post) {
-        return <div className="text-white">게시물이 존재하지 않습니다.</div>
+        return <div className="text-white">로딩 중 ...</div>
     }
 
     return (
