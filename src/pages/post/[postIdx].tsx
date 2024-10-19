@@ -80,7 +80,6 @@ export default function PostDetail() {
             setContent(post.content)
         }
     }, [editingPost, idx, post])
-
     // 게시물이 존재하지 않을 경우 처리
     if (!post) {
         return <div className="text-white">로딩 중 ...</div>

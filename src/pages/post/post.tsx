@@ -60,7 +60,7 @@ const PostComponent = () => {
     }
 
     const handlePostClick = (postIdx: number) => {
-        router.push(`/post/${postIdx}`)
+        router.push(`/post/${Number(postIdx)}`)
     }
 
     return (
@@ -119,7 +119,7 @@ const PostComponent = () => {
 
                     {/* Display posts */}
                     <div className="index">
-                        <div className="text-center index  text-black font-extrabold  border-t-black border-b-black border-t-4 border-b-4 mb-[15px]   bg-[#87ceeb] w-[500px]   text-[30px]">
+                        <div className="text-center index  text-black font-extrabold  border-t-black border-b-black border-t-4 border-b-4 mb-[15px]   bg-[#97d0ff] w-[500px]   text-[30px]">
                             INDEX
                         </div>
                         {posts?.map((post: any) => (
@@ -137,7 +137,7 @@ const PostComponent = () => {
 
                                 <button
                                     onClick={() => handlePostClick(post.idx)}
-                                    className="w-[100px] h-[40px] index shadow-lg hover:shadow-[0_0_10px_#758991] transition-shadow text-black font-extrabold m-1 bg-[#87ceeb]  border-black rounded-md border-[2px]"
+                                    className="w-[100px] h-[40px] index shadow-lg hover:shadow-[0_0_10px_#758991] transition-shadow text-black font-extrabold m-1 bg-[#97d0ff]  border-black rounded-md border-[2px]"
                                 >
                                     보기
                                 </button>
