@@ -4,8 +4,10 @@ import { useMutation } from '@tanstack/react-query'
 import Button from '@/components/button'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 export default function Signup() {
+    const router = useRouter()
     const signUpMutation = useMutation({
         mutationFn: async ({ nickname, password }: any) =>
             await axios.post('/api/signup', {
@@ -14,6 +16,7 @@ export default function Signup() {
             }),
         onSuccess: () => {
             toast.success('회원가입이 완료되었습니다.')
+            router.push('/')
         },
     })
 

@@ -2,8 +2,10 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 export function useLogin() {
+    const router = useRouter()
     const [nickname, setNickname] = useState('')
     const [password, setPassword] = useState('') // 내용 상태
     const me = useQuery({
@@ -48,12 +50,11 @@ export function useLogin() {
             }
 
             // localStorage.setItem('authorIdx', authorIdx)
-            return response.data
+            return payload
         },
         onSuccess: async () => {
             setNickname('') // ID 초기화
             setPassword('') // 비밀번호 초기화
-            me.refetch()
             toast.success('로그인이 완료되었습니다.')
         },
         onError: (error: any) => {

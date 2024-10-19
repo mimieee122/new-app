@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Button from '@/components/button'
 import { parseCookies } from 'nookies'
+import { useRouter } from 'next/router'
 
 const PostComponent = () => {
     const [isCreating, setIsCreating] = useState(false)
@@ -11,6 +12,8 @@ const PostComponent = () => {
     const [currentPostIdx, setCurrentPostIdx] = useState<string | null>(null)
     const [title, setTitle] = useState('') // 제목 상태
     const [content, setContent] = useState('') // 내용 상태
+
+    const router = useRouter()
 
     // Fetching posts
     const { data: posts, refetch } = useQuery({
@@ -36,7 +39,8 @@ const PostComponent = () => {
             }
         },
         onSuccess: () => {
-            setIsCreating(false)
+            setContent('')
+            setTitle('')
             refetch() // Refetch posts after successful creation
         },
     })
@@ -53,6 +57,10 @@ const PostComponent = () => {
         }
 
         createPostMutation.mutate({ title, content })
+    }
+
+    const handlePostClick = (postIdx: number) => {
+        router.push(`/post/${postIdx}`)
     }
 
     return (
@@ -82,6 +90,8 @@ const PostComponent = () => {
 
                         <label htmlFor="title"></label>
                         <input
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                             className="text-black"
                             type="text"
                             id="title"
@@ -91,6 +101,8 @@ const PostComponent = () => {
                         />
                         <label htmlFor="content"></label>
                         <textarea
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
                             className="text-black"
                             id="content"
                             name="content"
@@ -107,7 +119,7 @@ const PostComponent = () => {
 
                     {/* Display posts */}
                     <div className="index">
-                        <div className="text-center index  text-black font-extrabold  border-t-black border-b-black border-t-4 border-b-4 mb-[15px]   bg-[#97d0ff] w-[500px]   text-[30px]">
+                        <div className="text-center index  text-black font-extrabold  border-t-black border-b-black border-t-4 border-b-4 mb-[15px]   bg-[#87ceeb] w-[500px]   text-[30px]">
                             INDEX
                         </div>
                         {posts?.map((post: any) => (
@@ -122,11 +134,13 @@ const PostComponent = () => {
                                     </h2>
                                 </div>
                                 {/* <p>내용 : {post.content}</p> */}
-                                <Link href={`/post/${post.idx}`}>
-                                    <button className="w-[100px] h-[40px] index shadow-lg hover:shadow-[0_0_10px_#758991] transition-shadow text-black font-extrabold m-1 bg-[#97d0ff]  border-black rounded-md border-[2px]">
-                                        보기
-                                    </button>
-                                </Link>
+
+                                <button
+                                    onClick={() => handlePostClick(post.idx)}
+                                    className="w-[100px] h-[40px] index shadow-lg hover:shadow-[0_0_10px_#758991] transition-shadow text-black font-extrabold m-1 bg-[#87ceeb]  border-black rounded-md border-[2px]"
+                                >
+                                    보기
+                                </button>
                             </div>
                         ))}
                     </div>

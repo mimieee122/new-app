@@ -1,12 +1,12 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Link from 'next/link'
 import React from 'react'
 import Button from '@/components/button'
 import { toast } from 'react-toastify'
 import { Login } from '@/components/pages/home/login'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 // alert 없애기!
 
@@ -15,6 +15,8 @@ export default function Home() {
         queryKey: ['me'],
         queryFn: async () => await axios.get('/api/me'),
     })
+
+    const router = useRouter()
 
     // mutation은 데이터를 변경하는 작업을 의미
     const logoutMutation = useMutation({
@@ -35,13 +37,13 @@ export default function Home() {
     }
 
     // 쓰지 말기 !
-    // const goSignupPage = () => {
-    //     window.location.href = '/signup'
-    // }
+    const goSignupPage = () => {
+        router.push('/signup')
+    }
 
-    // const goPostPage = () => {
-    //     window.location.href = `/post`
-    // }
+    const goPostPage = () => {
+        router.push('/post/post')
+    }
 
     return (
         <div
@@ -60,11 +62,11 @@ export default function Home() {
             <div className="blue text-black w-[1000px]  flex flex-col gap-[30px] justify-center items-center ">
                 <div className="text-black login ">
                     {me.isSuccess ? (
-                        <div className="flex flex-col gap-[10px] contents-center  justify-center">
+                        <div className="flex  flex-col gap-[10px] contents-center  justify-center">
                             <div className=" flex flex-col justify-center items-center   border-gray-500 border-[3px] text-center gap-[30px] w-96 h-[50px] p-4 bg-white bg-opacity-70  rounded-xl">
                                 <p className="text-black text-center now ">
                                     <span>현재 접속중인 유저 ID : </span>
-                                    <span>{me?.data?.data?.nickname}</span>
+                                    <span>{me.data?.data?.nickname}</span>
                                 </p>
                             </div>
                             <div className=" flex flex-col justify-center items-center  border-[#3eb9ed] border-[5px] text-center gap-[30px] w-96 text-black p-4 bg-gray-100 bg-opacity-60 rounded-xl">
@@ -79,15 +81,13 @@ export default function Home() {
                         </div>
                     )}
                 </div>
-                <Link href="/signup">
-                    <Button>회원가입</Button>
-                </Link>
+
+                <Button onClick={goSignupPage}>회원가입</Button>
 
                 <div className="flex flex-row w-[600px] gap-[5px] justify-center">
                     <Button onClick={logout}>로그아웃</Button>
-                    <Link href="/post/post">
-                        <Button>게시판</Button>
-                    </Link>
+
+                    <Button onClick={goPostPage}>게시판</Button>
                 </div>
             </div>
         </div>
