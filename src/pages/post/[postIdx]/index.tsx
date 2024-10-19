@@ -62,7 +62,7 @@ export default function PostDetail() {
         },
         onSuccess: () => {
             // 캐시에서 해당 게시물 제거
-            router.push('/post/post') // 목록 페이지로 리디렉션
+            router.push('/post') // 목록 페이지로 리디렉션
         },
         onError: (error: any) => {
             if (error.response && error.response.data) {
@@ -93,7 +93,7 @@ export default function PostDetail() {
                 <Link href={'/'}>
                     <Button>HOME</Button>
                 </Link>
-                <Link href={'/post/post'}>
+                <Link href={'/post'}>
                     <Button>뒤로가기</Button>
                 </Link>
             </div>

@@ -42,13 +42,13 @@ export default function Home() {
     }
 
     const goPostPage = () => {
-        router.push('/post/post')
+        router.push('/post')
     }
 
     return (
         <div
             className={`${
-                me.isSuccess ? 'logged-in-bg' : ''
+                me?.isSuccess ? 'logged-in-bg' : ''
             } flex flex-row justify-center w-screen min-h-screen`}
         >
             <div className="absolute w-screen h-screen -z-10">
@@ -61,7 +61,7 @@ export default function Home() {
             </div>
             <div className="blue text-black w-[1000px]  flex flex-col gap-[30px] justify-center items-center ">
                 <div className="text-black login ">
-                    {me.isSuccess ? (
+                    {me?.isSuccess ? (
                         <div className="flex  flex-col gap-[10px] contents-center  justify-center">
                             <div className=" flex flex-col justify-center items-center   border-gray-500 border-[3px] text-center gap-[30px] w-96 h-[50px] p-4 bg-white bg-opacity-70  rounded-xl">
                                 <p className="text-black text-center now ">
